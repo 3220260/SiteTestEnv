@@ -1052,6 +1052,8 @@ function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
     
     inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition";
     activeBtn.className = `flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-${color}-600 border-b-4 border-${color}-600 bg-white`;
+
+    resetProcessWizard(showId);
 }
 
 /* =========================================
