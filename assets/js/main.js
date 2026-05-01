@@ -947,6 +947,22 @@ function handleDocumentClick(event) {
         return;
     }
 
+    const processWizardTarget = event.target.closest('[data-process-prev], [data-process-next]');
+    if (processWizardTarget) {
+        event.preventDefault();
+
+        const wizard = processWizardTarget.closest('[data-process-wizard]');
+        const containerId = wizard?.dataset.processContainer;
+
+        if (!containerId) return;
+
+        const currentIndex = processWizardState[containerId] || 0;
+        const direction = processWizardTarget.matches('[data-process-next]') ? 1 : -1;
+
+        showProcessWizardStep(containerId, currentIndex + direction);
+        return;
+    }
+
     const tabTarget = event.target.closest('[data-tab-show]');
     if (tabTarget) {
         event.preventDefault();
