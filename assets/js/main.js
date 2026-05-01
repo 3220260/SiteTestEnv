@@ -699,6 +699,180 @@ function handleSwipeBackTouchEnd(event) {
     }
 }
 
+const PROCESS_WIZARDS = Object.freeze({
+    'v-port': { title: 'Vodafone CU', subtitle: 'Φορητότητα', color: 'red' },
+    'v-new': { title: 'Vodafone CU', subtitle: 'Νέος αριθμός', color: 'red' },
+    'n-port': { title: 'NOVA Q', subtitle: 'Φορητότητα', color: 'blue' },
+    'n-new': { title: 'NOVA Q', subtitle: 'Νέος αριθμός', color: 'blue' },
+});
+
+const processWizardState = {};
+
+function getProcessWizardTheme(color) {
+    return color === 'blue'
+        ? {
+            border: 'border-blue-100',
+            bg: 'bg-blue-50',
+            text: 'text-blue-700',
+            button: 'bg-blue-600 hover:bg-blue-700',
+            dotActive: 'bg-blue-600',
+            dotInactive: 'bg-slate-300',
+        }
+        : {
+            border: 'border-red-100',
+            bg: 'bg-red-50',
+            text: 'text-red-700',
+            button: 'bg-red-600 hover:bg-red-700',
+            dotActive: 'bg-red-600',
+            dotInactive: 'bg-slate-300',
+        };
+}
+
+function getProcessTimeline(container) {
+    return Array.from(container.children).find((child) => child.classList.contains('relative'));
+}
+
+function getProcessSteps(container) {
+    const timeline = getProcessTimeline(container);
+    if (!timeline) return [];
+
+    return Array.from(timeline.children).filter((child) => {
+        return child.classList.contains('relative') &&
+            child.classList.contains('flex') &&
+            child.querySelector('h4');
+    });
+}
+
+function getProcessStepTitle(step, index) {
+    const title = step.querySelector('h4');
+    return title ? title.textContent.trim().replace(/^\d+\.\s*/, '') : `Βήμα ${index + 1}`;
+}
+
+function ensureProcessWizard(containerId) {
+    const container = document.getElementById(containerId);
+    const config = PROCESS_WIZARDS[containerId];
+
+    if (!container || !config) return;
+
+    const steps = getProcessSteps(container);
+    if (!steps.length) return;
+
+    const theme = getProcessWizardTheme(config.color);
+    const timeline = getProcessTimeline(container);
+
+    if (timeline) {
+        const verticalLine = Array.from(timeline.children).find((child) => child.classList.contains('absolute'));
+        if (verticalLine) verticalLine.classList.add('hidden');
+    }
+
+    let wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
+
+    if (!wizard) {
+        wizard = document.createElement('div');
+        wizard.dataset.processWizard = 'true';
+        wizard.dataset.processContainer = containerId;
+        wizard.className = `mb-5 rounded-2xl border ${theme.border} ${theme.bg} p-4 md:p-5 shadow-sm`;
+
+        wizard.innerHTML = `
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Οδηγός βημάτων</p>
+                    <h4 class="text-lg md:text-xl font-black text-slate-900">
+                        <span data-process-main-title></span>
+                    </h4>
+                    <p class="text-xs font-bold ${theme.text}" data-process-subtitle></p>
+                </div>
+
+                <div class="text-xs font-black text-slate-500">
+                    Βήμα <span data-process-current>1</span> από <span data-process-total>${steps.length}</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 mb-4" data-process-dots></div>
+
+            <div class="bg-white rounded-xl border border-white/70 p-3 mb-4">
+                <p class="text-sm font-black text-slate-800" data-process-step-title></p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button
+                    type="button"
+                    data-process-prev
+                    class="py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                    Πίσω
+                </button>
+
+                <button
+                    type="button"
+                    data-process-next
+                    class="py-3 rounded-xl ${theme.button} text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                    Επόμενο
+                </button>
+            </div>
+        `;
+
+        container.prepend(wizard);
+    }
+
+    wizard.querySelector('[data-process-main-title]').textContent = config.title;
+    wizard.querySelector('[data-process-subtitle]').textContent = config.subtitle;
+    wizard.querySelector('[data-process-total]').textContent = steps.length;
+
+    showProcessWizardStep(containerId, processWizardState[containerId] || 0);
+}
+
+function showProcessWizardStep(containerId, index) {
+    const container = document.getElementById(containerId);
+    const config = PROCESS_WIZARDS[containerId];
+
+    if (!container || !config) return;
+
+    const steps = getProcessSteps(container);
+    if (!steps.length) return;
+
+    const theme = getProcessWizardTheme(config.color);
+    const safeIndex = Math.min(Math.max(index, 0), steps.length - 1);
+
+    processWizardState[containerId] = safeIndex;
+
+    steps.forEach((step, stepIndex) => {
+        step.classList.toggle('hidden', stepIndex !== safeIndex);
+    });
+
+    const wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
+    if (!wizard) return;
+
+    wizard.querySelector('[data-process-current]').textContent = safeIndex + 1;
+    wizard.querySelector('[data-process-step-title]').textContent = getProcessStepTitle(steps[safeIndex], safeIndex);
+
+    const dots = wizard.querySelector('[data-process-dots]');
+    dots.innerHTML = '';
+
+    steps.forEach((_, dotIndex) => {
+        const dot = document.createElement('span');
+        dot.className = `h-2 flex-1 rounded-full ${dotIndex <= safeIndex ? theme.dotActive : theme.dotInactive}`;
+        dots.appendChild(dot);
+    });
+
+    const prev = wizard.querySelector('[data-process-prev]');
+    const next = wizard.querySelector('[data-process-next]');
+
+    prev.disabled = safeIndex === 0;
+    next.disabled = safeIndex === steps.length - 1;
+    next.textContent = safeIndex === steps.length - 1 ? 'Τέλος' : 'Επόμενο';
+}
+
+function resetProcessWizard(containerId) {
+    if (!PROCESS_WIZARDS[containerId]) return;
+
+    processWizardState[containerId] = 0;
+    ensureProcessWizard(containerId);
+    showProcessWizardStep(containerId, 0);
+}
+
+
 function handleDocumentClick(event) {
     const stopTarget = event.target.closest('[data-stop-click]');
     if (stopTarget) event.stopPropagation();
@@ -798,35 +972,35 @@ function handleDocumentClick(event) {
         return;
     }
 
-    const modalCloseTarget = event.target.closest('[data-modal-close]');
-    if (modalCloseTarget) {
-        event.preventDefault();
+   const modalCloseTarget = event.target.closest('[data-modal-close]');
+if (modalCloseTarget) {
+    event.preventDefault();
 
-        const modalToClose = modalCloseTarget.dataset.modalClose;
-        const modalToOpen = modalCloseTarget.dataset.modalTarget;
+    const modalToClose = modalCloseTarget.dataset.modalClose;
+    const modalToOpen = modalCloseTarget.dataset.modalTarget;
 
-        closeModal(modalToClose, !modalToOpen);
+    closeModal(modalToClose);
 
-        if (modalToOpen) {
-            openModal(modalToOpen);
+    if (modalToOpen) {
+        openModal(modalToOpen);
 
-            if (
-                modalCloseTarget.dataset.openTabShow &&
-                modalCloseTarget.dataset.openTabHide &&
-                modalCloseTarget.dataset.openTabActive &&
+        if (
+            modalCloseTarget.dataset.openTabShow &&
+            modalCloseTarget.dataset.openTabHide &&
+            modalCloseTarget.dataset.openTabActive &&
+            modalCloseTarget.dataset.openTabInactive
+        ) {
+            switchTab(
+                modalCloseTarget.dataset.openTabShow,
+                modalCloseTarget.dataset.openTabHide,
+                modalCloseTarget.dataset.openTabActive,
                 modalCloseTarget.dataset.openTabInactive
-            ) {
-                switchTab(
-                    modalCloseTarget.dataset.openTabShow,
-                    modalCloseTarget.dataset.openTabHide,
-                    modalCloseTarget.dataset.openTabActive,
-                    modalCloseTarget.dataset.openTabInactive
-                );
-            }
+            );
         }
-
-        return;
     }
+
+    return;
+}
 
     const modalTarget = event.target.closest('[data-modal-target]');
     if (modalTarget) {
