@@ -798,15 +798,35 @@ function handleDocumentClick(event) {
         return;
     }
 
-    const modalCloseTarget = event.target.closest('[data-modal-close]');
-    if (modalCloseTarget) {
-        event.preventDefault();
-        const modalToClose = modalCloseTarget.dataset.modalClose;
-        const modalToOpen = modalCloseTarget.dataset.modalTarget;
-        closeModal(modalToClose);
-        if (modalToOpen) openModal(modalToOpen);
-        return;
+   const modalCloseTarget = event.target.closest('[data-modal-close]');
+if (modalCloseTarget) {
+    event.preventDefault();
+
+    const modalToClose = modalCloseTarget.dataset.modalClose;
+    const modalToOpen = modalCloseTarget.dataset.modalTarget;
+
+    closeModal(modalToClose);
+
+    if (modalToOpen) {
+        openModal(modalToOpen);
+
+        if (
+            modalCloseTarget.dataset.openTabShow &&
+            modalCloseTarget.dataset.openTabHide &&
+            modalCloseTarget.dataset.openTabActive &&
+            modalCloseTarget.dataset.openTabInactive
+        ) {
+            switchTab(
+                modalCloseTarget.dataset.openTabShow,
+                modalCloseTarget.dataset.openTabHide,
+                modalCloseTarget.dataset.openTabActive,
+                modalCloseTarget.dataset.openTabInactive
+            );
+        }
     }
+
+    return;
+}
 
     const modalTarget = event.target.closest('[data-modal-target]');
     if (modalTarget) {
