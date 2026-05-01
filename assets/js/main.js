@@ -392,7 +392,7 @@ function openModalFromHash() {
     }
 }
 
-function closeModal(id) {
+function closeModal(id, updateHistory = true) {
     const modal = document.getElementById(id);
     const wasOpen = modal && !modal.classList.contains('hidden');
     if (modal) modal.classList.add('hidden');
@@ -407,9 +407,9 @@ function closeModal(id) {
         }
     }
     
-    if (window.location.hash === `#${id}`) {
-        history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-    }
+   if (updateHistory && window.location.hash === `#${id}`) {
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+}
 
     if (wasOpen) {
         unlockPageScrollIfIdle();
@@ -798,35 +798,35 @@ function handleDocumentClick(event) {
         return;
     }
 
-   const modalCloseTarget = event.target.closest('[data-modal-close]');
-if (modalCloseTarget) {
-    event.preventDefault();
+    const modalCloseTarget = event.target.closest('[data-modal-close]');
+    if (modalCloseTarget) {
+        event.preventDefault();
 
-    const modalToClose = modalCloseTarget.dataset.modalClose;
-    const modalToOpen = modalCloseTarget.dataset.modalTarget;
+        const modalToClose = modalCloseTarget.dataset.modalClose;
+        const modalToOpen = modalCloseTarget.dataset.modalTarget;
 
-    closeModal(modalToClose);
+        closeModal(modalToClose, !modalToOpen);
 
-    if (modalToOpen) {
-        openModal(modalToOpen);
+        if (modalToOpen) {
+            openModal(modalToOpen);
 
-        if (
-            modalCloseTarget.dataset.openTabShow &&
-            modalCloseTarget.dataset.openTabHide &&
-            modalCloseTarget.dataset.openTabActive &&
-            modalCloseTarget.dataset.openTabInactive
-        ) {
-            switchTab(
-                modalCloseTarget.dataset.openTabShow,
-                modalCloseTarget.dataset.openTabHide,
-                modalCloseTarget.dataset.openTabActive,
+            if (
+                modalCloseTarget.dataset.openTabShow &&
+                modalCloseTarget.dataset.openTabHide &&
+                modalCloseTarget.dataset.openTabActive &&
                 modalCloseTarget.dataset.openTabInactive
-            );
+            ) {
+                switchTab(
+                    modalCloseTarget.dataset.openTabShow,
+                    modalCloseTarget.dataset.openTabHide,
+                    modalCloseTarget.dataset.openTabActive,
+                    modalCloseTarget.dataset.openTabInactive
+                );
+            }
         }
-    }
 
-    return;
-}
+        return;
+    }
 
     const modalTarget = event.target.closest('[data-modal-target]');
     if (modalTarget) {
