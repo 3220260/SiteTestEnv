@@ -757,6 +757,8 @@ function ensureProcessWizard(containerId) {
     const steps = getProcessSteps(container);
     if (!steps.length) return;
 
+    moveDownloadBlockToPreparation(container, steps[0]);
+
     const theme = getProcessWizardTheme(config.color);
     const timeline = getProcessTimeline(container);
 
@@ -822,6 +824,44 @@ function ensureProcessWizard(containerId) {
 
     showProcessWizardStep(containerId, processWizardState[containerId] || 0);
 }
+
+function moveDownloadBlockToPreparation(container, firstStep) {
+    if (!container || !firstStep) return;
+
+    if (firstStep.querySelector('[data-downloads-moved="true"]')) return;
+
+    const downloadBlocks = Array.from(container.querySelectorAll('div, section, footer')).filter((element) => {
+        if (element === container || firstStep.contains(element)) return false;
+
+        const text = element.textContent.replace(/\s+/g, ' ').trim();
+
+        return (
+            text.includes('Κατεβάστε τα') ||
+            text.includes('Κατεβάστε το') ||
+            text.includes('Κατεβάστε την')
+        ) && element.querySelector('a[href]');
+    });
+
+    if (!downloadBlocks.length) return;
+
+    const downloadBlock = downloadBlocks.sort((a, b) => {
+        return a.textContent.length - b.textContent.length;
+    })[0];
+
+    downloadBlock.dataset.downloadsMoved = 'true';
+    downloadBlock.classList.add('mt-4');
+
+    downloadBlock.innerHTML = downloadBlock.innerHTML
+        .replaceAll('Κατεβάστε τα 3 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε τα 2 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε το 1 απαραίτητο εντυπο:', 'Κατέβασε το έγγραφο:')
+        .replaceAll('Κατεβάστε τα 3 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε τα 2 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε το 1 απαραίτητο έντυπο:', 'Κατέβασε το έγγραφο:');
+
+    firstStep.appendChild(downloadBlock);
+}
+
 
 function showProcessWizardStep(containerId, index) {
     const container = document.getElementById(containerId);
