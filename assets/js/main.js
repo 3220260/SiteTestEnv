@@ -859,7 +859,16 @@ function moveDownloadBlockToPreparation(container, firstStep) {
         .replaceAll('Κατεβάστε τα 2 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
         .replaceAll('Κατεβάστε το 1 απαραίτητο έντυπο:', 'Κατέβασε το έγγραφο:');
 
-    firstStep.appendChild(downloadBlock);
+    const preparationCard = firstStep.querySelector('h4')?.parentElement || firstStep;
+
+downloadBlock.classList.remove('sticky', 'bottom-0', 'z-20');
+downloadBlock.classList.add('mt-5', 'pt-4', 'border-t', 'border-slate-100');
+
+downloadBlock.querySelectorAll('a[href]').forEach((link) => {
+    link.classList.add('w-full', 'justify-center');
+});
+
+preparationCard.appendChild(downloadBlock);
 }
 
 
