@@ -360,106 +360,15 @@
    
 
 
-    <div id="mobileModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-2 md:p-4">
-        <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden animate-[fadeIn_0.3s_ease-out] flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center p-5 border-b shrink-0">
-                <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight">Επιλέξτε Πάροχο</h3>
-                <button data-modal-close="mobileModal" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-600 transition-colors">&times;</button>
-            </div>
-        <div
-            id="mobileOffersProviderGrid"
-            class="p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 overflow-y-auto custom-scroll"
-            aria-live="polite"
-            >
-            <p class="col-span-full text-center text-sm font-bold text-slate-500">
-                Φόρτωση παρόχων...
-            </p>
-            </div>
-            
-        <div class="bg-white p-6 rounded-2xl border-2 border-transparent hover:border-red-600 shadow-md transition cursor-pointer flex flex-col justify-between" data-modal-close="mobileModal" data-modal-target="vodaModal">
-            <div class="flex justify-between items-center mb-6">
-                <div class="flex flex-col">
-                    <span class="font-black text-2xl md:text-3xl text-red-600 leading-tight">Vodafone CU</span>
-                    <span class="animate-pulse bg-red-600 text-white text-xl md:text-2xl font-black px-2 py-1 rounded-lg shadow-sm w-fit mt-1">
-                        100€
-                    </span>
-                </div>
-                <i class="text-3xl text-gray-200 fa-solid fa-mobile-screen group-hover:text-red-500 transition relative z-10"></i>
-            </div>
-            
-            <ul class="text-sm font-medium text-slate-600 space-y-3 mb-8">
-                <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-cloud-arrow-down text-red-600 mt-1"></i> 
-                    <span>300 GB Data Κάθε μήνα <br><small class="text-slate-400">Ό,τι μείνει μεταφέρεται στον επόμενο μήνα</small></span>
-                </li>
-                <li class="flex items-center gap-3">
-                    <i class="fa-solid fa-phone-flip text-red-600"></i> 
-                    <span>Απεριόριστη Ομιλία (σταθερά &amp; κινητά)</span>
-                </li>
-                <li class="flex items-center gap-3">
-                    <i class="fa-solid fa-plane-arrival text-red-600"></i> 
-                    <span>Roaming: 200 Λεπτά Ομιλίας και 11 GB</span>
-                </li>
-                <li class="flex items-center gap-3">
-                    <i class="fa-solid fa-comment-sms text-red-600"></i> 
-                    <span>100 sms</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-piggy-bank text-red-600 mt-1 text-lg"></i>
-                    <div>
-                        <strong class="block text-slate-900 leading-tight">
-                            Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.
-                        </strong>
-                    </div>
-                </li>
-            </ul>
-            <button
-  type="button"
-  data-modal-close="mobileModal"
-  data-modal-target="vodaChoiceModal"
-  class="w-full py-4 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 shadow-lg transition mt-auto"
+   <div
+  id="mobileOffersProviderGrid"
+  class="p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 overflow-y-auto custom-scroll"
+  aria-live="polite"
 >
-  Δες Δικαιολογητικά
-</button>
-        </div>
-
-        <div class="bg-white p-6 md:p-8 rounded-2xl border-2 border-transparent hover:border-blue-600 shadow-sm hover:shadow-2xl transition cursor-pointer group flex flex-col justify-between" data-modal-close="mobileModal" data-modal-target="novaModal">
-            <div class="flex justify-between items-center mb-6">
-                <div class="flex flex-col">
-                    <span class="font-black text-2xl md:text-3xl text-blue-600 leading-tight">NOVA Q</span>
-                    <span class="animate-pulse bg-blue-600 text-white text-xl md:text-2xl font-black px-2 py-1 rounded-lg shadow-sm w-fit mt-1">
-                        100€
-                    </span>
-                </div>
-                <i class="text-3xl text-gray-200 fa-solid fa-mobile-screen group-hover:text-blue-500 transition relative z-10"></i>
-            </div>
-            
-            <ul class="text-sm font-medium text-slate-600 space-y-3 mb-8">
-                <li class="flex items-center gap-3"><i class="fa-solid fa-cloud-arrow-down text-blue-600"></i> <span>Απεριόριστα GB</span></li>
-                <li class="flex items-center gap-3"><i class="fa-solid fa-phone-flip text-blue-600"></i> <span>Απεριόριστη Ομιλία (σταθερά &amp; κινητά)</span></li>
-                <li class="flex items-center gap-3"><i class="fa-solid fa-comment-sms text-blue-600"></i> <span>300 sms</span></li>
-                <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-piggy-bank text-blue-600 mt-1 text-lg"></i>
-                    <div>
-                        <strong class="block text-slate-900 leading-tight">
-                            Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.
-                        </strong>
-                    </div>
-                </li>
-            </ul>
-            <button
-  type="button"
-  data-modal-close="mobileModal"
-  data-modal-target="novaChoiceModal"
-  class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg transition mt-auto"
->
-  Δες Δικαιολογητικά
-</button>
-        </div>
-
-    </div>
-        </div>
-    </div>
+  <p class="col-span-full text-center text-sm font-bold text-slate-500">
+    Φόρτωση παρόχων...
+  </p>
+</div>
 
     <!-- VODAFONE - ΕΠΙΛΟΓΗ ΤΥΠΟΥ ΔΙΑΔΙΚΑΣΙΑΣ -->
 <div id="vodaChoiceModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-4">
@@ -566,9 +475,9 @@
                     <div>
                     <div class="flex items-center gap-2 flex-wrap mb-2">
                         <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-                        <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-                        <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-                    </div>
+            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
+            <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
+          </div>
                     <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
                     <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
                     </div>
@@ -647,7 +556,7 @@
                         <button type="button" class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition">
                         Προβολή Παραδείγματος
                         </button>
-                        <a href="assets/docs/example.pdf" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
+                        <a href="#" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
                         Λήψη Εντύπου
                         </a>
                     </div>
@@ -765,9 +674,9 @@
                         <div>
                         <div class="flex items-center gap-2 flex-wrap mb-2">
                             <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-                            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-                            <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-                        </div>
+            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
+            <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold">Νέος Αριθμός</span>
+          </div>
                         <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
                         <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
                         </div>
@@ -846,7 +755,7 @@
                             <button type="button" class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition">
                             Προβολή Παραδείγματος
                             </button>
-                            <a href="assets/docs/example.pdf" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
+                            <a href="#" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
                             Λήψη Εντύπου
                             </a>
                         </div>
@@ -976,10 +885,10 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <div>
                 <div class="flex items-center gap-2 flex-wrap mb-2">
-                    <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-                    <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-                    <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-                </div>
+                    <span class="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">NOVA Q</span>
+            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
+            <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
+          </div>
                 <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
                 <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
                 </div>
@@ -1058,7 +967,7 @@
                     <button type="button" class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition">
                     Προβολή Παραδείγματος
                     </button>
-                    <a href="assets/docs/example.pdf" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
+                    <a href="#" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
                     Λήψη Εντύπου
                     </a>
                 </div>
@@ -1130,7 +1039,7 @@
                 </div>
                 <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
                 <li>Τοποθέτησε τη νέα SIM.</li>
-                <li>Κάλεσε στο <span class="font-black text-slate-900">1252</span>.</li>
+                <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
                 <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
                 </ol>
             </div>
@@ -1167,10 +1076,10 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
             <div class="flex items-center gap-2 flex-wrap mb-2">
-                <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-                <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-                <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-            </div>
+                <span class="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">NOVA Q</span>
+            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
+            <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold">Νέος Αριθμός</span>
+          </div>
             <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
             <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
             </div>
@@ -1249,7 +1158,7 @@
                 <button type="button" class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition">
                 Προβολή Παραδείγματος
                 </button>
-                <a href="assets/docs/example.pdf" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
+                <a href="#" class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition">
                 Λήψη Εντύπου
                 </a>
             </div>
@@ -1321,7 +1230,7 @@
             </div>
             <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
             <li>Τοποθέτησε τη νέα SIM.</li>
-            <li>Κάλεσε στο <span class="font-black text-slate-900">1252</span>.</li>
+            <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
             <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
             </ol>
         </div>
