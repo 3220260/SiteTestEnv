@@ -673,6 +673,36 @@ function handleSwipeBackTouchStart(event) {
     swipeBackTracking = true;
 }
 
+function handleProcessWizardSwipeBack() {
+    if (
+        typeof PROCESS_WIZARDS === 'undefined' ||
+        typeof processWizardState === 'undefined' ||
+        typeof showProcessWizardStep !== 'function'
+    ) {
+        return false;
+    }
+
+    const activeProcess = Array.from(document.querySelectorAll('#v-port, #v-new, #n-port, #n-new')).find((element) => {
+        const modal = element.closest('.modal-backdrop');
+
+        return modal &&
+            !modal.classList.contains('hidden') &&
+            !element.classList.contains('hidden') &&
+            PROCESS_WIZARDS[element.id];
+    });
+
+    if (!activeProcess) return false;
+
+    const currentIndex = processWizardState[activeProcess.id] || 0;
+
+    if (currentIndex > 0) {
+        showProcessWizardStep(activeProcess.id, currentIndex - 1);
+        return true;
+    }
+
+    return false;
+}
+
 function handleSwipeBackTouchEnd(event) {
     if (!swipeBackTracking || !event.changedTouches || event.changedTouches.length !== 1) {
         resetSwipeBackTracking();
@@ -695,7 +725,11 @@ function handleSwipeBackTouchEnd(event) {
             direction: 'right',
         });
 
-        window.history.back();
+        if (handleProcessWizardSwipeBack()) {
+        return;
+    }
+
+    window.history.back();
     }
 }
 
