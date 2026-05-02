@@ -371,7 +371,7 @@ function openModal(id, updateHistory = true) {
 
     if (wasHidden) stopAllOfferCardViews();
     modal.classList.remove('hidden');
-    loadDeferredIframes(modal);
+    loadDeferredIframes(modal); activateVisibleProcessWizard(modal);
     if (wasHidden) {
         lockPageScroll();
         startOfferView(id);
@@ -699,6 +699,7 @@ function handleSwipeBackTouchEnd(event) {
     }
 }
 
+
 const PROCESS_WIZARDS = Object.freeze({
     'v-port': { title: 'Vodafone CU', subtitle: 'Φορητότητα', color: 'red' },
     'v-new': { title: 'Vodafone CU', subtitle: 'Νέος αριθμός', color: 'red' },
@@ -728,6 +729,13 @@ function getProcessWizardTheme(color) {
         };
 }
 
+function makeEl(tag, className = '', text = '') {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text) element.textContent = text;
+    return element;
+}
+
 function getProcessTimeline(container) {
     return Array.from(container.children).find((child) => child.classList.contains('relative'));
 }
@@ -746,6 +754,109 @@ function getProcessSteps(container) {
 function getProcessStepTitle(step, index) {
     const title = step.querySelector('h4');
     return title ? title.textContent.trim().replace(/^\d+\.\s*/, '') : `Βήμα ${index + 1}`;
+}
+
+function moveDownloadBlockToPreparation(container, firstStep) {
+    if (!container || !firstStep) return;
+    if (firstStep.querySelector('[data-downloads-moved="true"]')) return;
+
+    const downloadBlocks = Array.from(container.querySelectorAll('div, section, footer')).filter((element) => {
+        if (element === container || firstStep.contains(element)) return false;
+
+        const text = element.textContent.replace(/\s+/g, ' ').trim();
+
+        return (
+            text.includes('Κατεβάστε τα') ||
+            text.includes('Κατεβάστε το') ||
+            text.includes('Κατεβάστε την')
+        ) && element.querySelector('a[href]');
+    });
+
+    if (!downloadBlocks.length) return;
+
+    const downloadBlock = downloadBlocks.sort((a, b) => a.textContent.length - b.textContent.length)[0];
+    const preparationCard = firstStep.querySelector('h4')?.parentElement || firstStep;
+
+    downloadBlock.dataset.downloadsMoved = 'true';
+    downloadBlock.classList.remove('sticky', 'bottom-0', 'z-20');
+    downloadBlock.classList.add('mt-5', 'pt-4', 'border-t', 'border-slate-100');
+
+    downloadBlock.innerHTML = downloadBlock.innerHTML
+        .replaceAll('Κατεβάστε τα 3 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε τα 2 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε το 1 απαραίτητο εντυπο:', 'Κατέβασε το έγγραφο:')
+        .replaceAll('Κατεβάστε τα 3 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε τα 2 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
+        .replaceAll('Κατεβάστε το 1 απαραίτητο έντυπο:', 'Κατέβασε το έγγραφο:');
+
+    downloadBlock.querySelectorAll('a[href]').forEach((link) => {
+        link.classList.add('justify-center');
+    });
+
+    preparationCard.appendChild(downloadBlock);
+}
+
+function createProcessWizard(containerId, config, theme, steps) {
+    const wizard = makeEl('div', `mb-5 rounded-2xl border ${theme.border} ${theme.bg} p-4 md:p-5 shadow-sm`);
+    wizard.dataset.processWizard = 'true';
+    wizard.dataset.processContainer = containerId;
+
+    const header = makeEl('div', 'flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4');
+
+    const titleWrap = makeEl('div');
+    titleWrap.appendChild(makeEl('p', 'text-[10px] font-black uppercase tracking-[0.22em] text-slate-400', 'Οδηγός βημάτων'));
+
+    const title = makeEl('h4', 'text-lg md:text-xl font-black text-slate-900');
+    const mainTitle = makeEl('span');
+    mainTitle.dataset.processMainTitle = '';
+    mainTitle.textContent = config.title;
+    title.appendChild(mainTitle);
+    titleWrap.appendChild(title);
+
+    const subtitle = makeEl('p', `text-xs font-bold ${theme.text}`, config.subtitle);
+    subtitle.dataset.processSubtitle = '';
+    titleWrap.appendChild(subtitle);
+
+    const counter = makeEl('div', 'text-xs font-black text-slate-500');
+    counter.append('Βήμα ');
+    const current = makeEl('span', '', '1');
+    current.dataset.processCurrent = '';
+    counter.appendChild(current);
+    counter.append(' από ');
+    const total = makeEl('span', '', String(steps.length));
+    total.dataset.processTotal = '';
+    counter.appendChild(total);
+
+    header.appendChild(titleWrap);
+    header.appendChild(counter);
+
+    const dots = makeEl('div', 'flex items-center gap-2 mb-4');
+    dots.dataset.processDots = '';
+
+    const stepBox = makeEl('div', 'bg-white rounded-xl border border-white/70 p-3 mb-4');
+    const stepTitle = makeEl('p', 'text-sm font-black text-slate-800');
+    stepTitle.dataset.processStepTitle = '';
+    stepBox.appendChild(stepTitle);
+
+    const actions = makeEl('div', 'grid grid-cols-2 gap-3');
+
+    const prev = makeEl('button', 'py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed', 'Πίσω');
+    prev.type = 'button';
+    prev.dataset.processPrev = '';
+
+    const next = makeEl('button', `py-3 rounded-xl ${theme.button} text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed`, 'Επόμενο');
+    next.type = 'button';
+    next.dataset.processNext = '';
+
+    actions.appendChild(prev);
+    actions.appendChild(next);
+
+    wizard.appendChild(header);
+    wizard.appendChild(dots);
+    wizard.appendChild(stepBox);
+    wizard.appendChild(actions);
+
+    return wizard;
 }
 
 function ensureProcessWizard(containerId) {
@@ -770,83 +881,20 @@ function ensureProcessWizard(containerId) {
     let wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
 
     if (!wizard) {
-        wizard = document.createElement('div');
-        wizard.dataset.processWizard = 'true';
-        wizard.dataset.processContainer = containerId;
-        wizard.className = `mb-5 rounded-2xl border ${theme.border} ${theme.bg} p-4 md:p-5 shadow-sm`;
-
-       wizard.innerHTML =
-    '<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">' +
-        '<div>' +
-            '<p class="text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Οδηγός βημάτων</p>' +
-            '<h4 class="text-lg md:text-xl font-black text-slate-900"><span data-process-main-title></span></h4>' +
-            '<p class="text-xs font-bold ' + theme.text + '" data-process-subtitle></p>' +
-        '</div>' +
-        '<div class="text-xs font-black text-slate-500">Βήμα <span data-process-current>1</span> από <span data-process-total>' + steps.length + '</span></div>' +
-    '</div>' +
-    '<div class="flex items-center gap-2 mb-4" data-process-dots></div>' +
-    '<div class="bg-white rounded-xl border border-white/70 p-3 mb-4"><p class="text-sm font-black text-slate-800" data-process-step-title></p></div>' +
-    '<div class="grid grid-cols-2 gap-3">' +
-        '<button type="button" data-process-prev class="py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed">Πίσω</button>' +
-        '<button type="button" data-process-next class="py-3 rounded-xl ' + theme.button + ' text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed">Επόμενο</button>' +
-    '</div>';
-
+        wizard = createProcessWizard(containerId, config, theme, steps);
         container.prepend(wizard);
     }
 
-    wizard.querySelector('[data-process-main-title]').textContent = config.title;
-    wizard.querySelector('[data-process-subtitle]').textContent = config.subtitle;
-    wizard.querySelector('[data-process-total]').textContent = steps.length;
+    const mainTitle = wizard.querySelector('[data-process-main-title]');
+    const subtitle = wizard.querySelector('[data-process-subtitle]');
+    const total = wizard.querySelector('[data-process-total]');
+
+    if (mainTitle) mainTitle.textContent = config.title;
+    if (subtitle) subtitle.textContent = config.subtitle;
+    if (total) total.textContent = steps.length;
 
     showProcessWizardStep(containerId, processWizardState[containerId] || 0);
 }
-
-function moveDownloadBlockToPreparation(container, firstStep) {
-    if (!container || !firstStep) return;
-
-    if (firstStep.querySelector('[data-downloads-moved="true"]')) return;
-
-    const downloadBlocks = Array.from(container.querySelectorAll('div, section, footer')).filter((element) => {
-        if (element === container || firstStep.contains(element)) return false;
-
-        const text = element.textContent.replace(/\s+/g, ' ').trim();
-
-        return (
-            text.includes('Κατεβάστε τα') ||
-            text.includes('Κατεβάστε το') ||
-            text.includes('Κατεβάστε την')
-        ) && element.querySelector('a[href]');
-    });
-
-    if (!downloadBlocks.length) return;
-
-    const downloadBlock = downloadBlocks.sort((a, b) => {
-        return a.textContent.length - b.textContent.length;
-    })[0];
-
-    downloadBlock.dataset.downloadsMoved = 'true';
-    downloadBlock.classList.add('mt-4');
-
-    downloadBlock.innerHTML = downloadBlock.innerHTML
-        .replaceAll('Κατεβάστε τα 3 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
-        .replaceAll('Κατεβάστε τα 2 απαραίτητα εντυπα:', 'Κατέβασε τα έγγραφα:')
-        .replaceAll('Κατεβάστε το 1 απαραίτητο εντυπο:', 'Κατέβασε το έγγραφο:')
-        .replaceAll('Κατεβάστε τα 3 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
-        .replaceAll('Κατεβάστε τα 2 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
-        .replaceAll('Κατεβάστε το 1 απαραίτητο έντυπο:', 'Κατέβασε το έγγραφο:');
-
-    const preparationCard = firstStep.querySelector('h4')?.parentElement || firstStep;
-
-downloadBlock.classList.remove('sticky', 'bottom-0', 'z-20');
-downloadBlock.classList.add('mt-5', 'pt-4', 'border-t', 'border-slate-100');
-
-downloadBlock.querySelectorAll('a[href]').forEach((link) => {
-    link.classList.add('w-full', 'justify-center');
-});
-
-preparationCard.appendChild(downloadBlock);
-}
-
 
 function showProcessWizardStep(containerId, index) {
     const container = document.getElementById(containerId);
@@ -869,24 +917,30 @@ function showProcessWizardStep(containerId, index) {
     const wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
     if (!wizard) return;
 
-    wizard.querySelector('[data-process-current]').textContent = safeIndex + 1;
-    wizard.querySelector('[data-process-step-title]').textContent = getProcessStepTitle(steps[safeIndex], safeIndex);
-
+    const current = wizard.querySelector('[data-process-current]');
+    const stepTitle = wizard.querySelector('[data-process-step-title]');
     const dots = wizard.querySelector('[data-process-dots]');
-    dots.innerHTML = '';
-
-    steps.forEach((_, dotIndex) => {
-        const dot = document.createElement('span');
-        dot.className = `h-2 flex-1 rounded-full ${dotIndex <= safeIndex ? theme.dotActive : theme.dotInactive}`;
-        dots.appendChild(dot);
-    });
-
     const prev = wizard.querySelector('[data-process-prev]');
     const next = wizard.querySelector('[data-process-next]');
 
-    prev.disabled = safeIndex === 0;
-    next.disabled = safeIndex === steps.length - 1;
-    next.textContent = safeIndex === steps.length - 1 ? 'Τέλος' : 'Επόμενο';
+    if (current) current.textContent = safeIndex + 1;
+    if (stepTitle) stepTitle.textContent = getProcessStepTitle(steps[safeIndex], safeIndex);
+
+    if (dots) {
+        dots.innerHTML = '';
+
+        steps.forEach((_, dotIndex) => {
+            const dot = makeEl('span', `h-2 flex-1 rounded-full ${dotIndex <= safeIndex ? theme.dotActive : theme.dotInactive}`);
+            dots.appendChild(dot);
+        });
+    }
+
+    if (prev) prev.disabled = safeIndex === 0;
+
+    if (next) {
+        next.disabled = safeIndex === steps.length - 1;
+        next.textContent = safeIndex === steps.length - 1 ? 'Τέλος' : 'Επόμενο';
+    }
 }
 
 function resetProcessWizard(containerId) {
@@ -895,6 +949,16 @@ function resetProcessWizard(containerId) {
     processWizardState[containerId] = 0;
     ensureProcessWizard(containerId);
     showProcessWizardStep(containerId, 0);
+}
+
+function activateVisibleProcessWizard(root) {
+    if (!root) return;
+
+    const activeProcess = Array.from(root.querySelectorAll('#v-port, #v-new, #n-port, #n-new')).find((element) => {
+        return !element.classList.contains('hidden');
+    });
+
+    if (activeProcess) resetProcessWizard(activeProcess.id);
 }
 
 
