@@ -1641,4 +1641,100 @@ window.onpopstate = function (event) {
     requestAnimationFrame(refreshVisibleOfferCards);
 };
 
+/* =========================================================
+   MOBILE PROCESS UX POLISH
+   Ασφαλές add-on: δεν αλλάζει τα δεδομένα των οδηγών.
+   Βελτιώνει μόνο την εμπειρία σε κινητά.
+   ========================================================= */
+(function () {
+  const mobileQuery = window.matchMedia('(max-width: 640px)');
+  const PROCESS_IDS = ['v-port', 'v-new', 'n-port', 'n-new'];
 
+  function isMobile() {
+    return mobileQuery.matches;
+  }
+
+  function getActiveProcessContainer() {
+    return PROCESS_IDS
+      .map((id) => document.getElementById(id))
+      .find((container) => {
+        const modal = container?.closest('.modal-backdrop');
+        return container && modal && !modal.classList.contains('hidden') && !container.classList.contains('hidden');
+      });
+  }
+
+  function addMobileSheetClasses() {
+    [
+      'mobileModal',
+      'vodaChoiceModal',
+      'novaChoiceModal',
+      'vodaModal',
+      'novaModal',
+      'novaLinePhone',
+      'novaEonModal',
+      'healthModal',
+      'gprotasisModal',
+    ].forEach((id) => {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('mobile-sheet-ready');
+    });
+  }
+
+  function scrollActiveStepToTop(container) {
+    if (!isMobile() || !container) return;
+
+    const activeStep = Array.from(container.querySelectorAll('.relative.flex'))
+      .find((step) => !step.classList.contains('hidden') && step.querySelector('h4'));
+
+    const scrollRoot = container.closest('.custom-scroll') || container.closest('.modal-backdrop') || container;
+    if (!activeStep || !scrollRoot) return;
+
+    requestAnimationFrame(() => {
+      const wizard = container.querySelector('[data-process-wizard="true"]');
+      const wizardHeight = wizard ? wizard.getBoundingClientRect().height : 0;
+      const rootRect = scrollRoot.getBoundingClientRect();
+      const stepRect = activeStep.getBoundingClientRect();
+      const nextTop = scrollRoot.scrollTop + (stepRect.top - rootRect.top) - wizardHeight - 12;
+      scrollRoot.scrollTo({ top: Math.max(0, nextTop), behavior: 'smooth' });
+    });
+  }
+
+  function simplifyWizardCopy(container) {
+    if (!container) return;
+    const wizard = container.querySelector('[data-process-wizard="true"]');
+    if (!wizard || wizard.dataset.mobileCopyReady === 'true') return;
+
+    const hint = wizard.querySelector('p.md\\:hidden');
+    if (hint) hint.textContent = 'Βλέπεις ένα βήμα τη φορά για να μη χαθείς.';
+
+    const changeChoice = wizard.querySelector('[data-process-change-choice]');
+    if (changeChoice) changeChoice.textContent = 'Αλλαγή διαδικασίας';
+
+    wizard.dataset.mobileCopyReady = 'true';
+  }
+
+  function polishCurrentMobileProcess() {
+    if (!isMobile()) return;
+    const container = getActiveProcessContainer();
+    if (!container) return;
+    simplifyWizardCopy(container);
+    scrollActiveStepToTop(container);
+  }
+
+  if (typeof showProcessWizardStep === 'function') {
+    const originalShowProcessWizardStep = showProcessWizardStep;
+    showProcessWizardStep = function patchedShowProcessWizardStep(containerId, index) {
+      originalShowProcessWizardStep(containerId, index);
+      const container = document.getElementById(containerId);
+      simplifyWizardCopy(container);
+      scrollActiveStepToTop(container);
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    addMobileSheetClasses();
+    polishCurrentMobileProcess();
+  });
+
+  mobileQuery.addEventListener?.('change', polishCurrentMobileProcess);
+})();
