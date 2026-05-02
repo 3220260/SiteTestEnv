@@ -850,19 +850,23 @@ function moveDownloadBlockToPreparation(container, firstStep) {
 
     const linksGrid = makeEl(
         'div',
-        `grid grid-cols-1 ${documentLinks.length > 1 ? 'sm:grid-cols-2' : ''} gap-2`
+        'flex flex-wrap justify-center items-start gap-4'
     );
 
     documentLinks.forEach((link) => {
-        link.classList.remove('text-xs');
+        link.classList.remove('text-xs', 'w-full', 'min-h-[46px]');
         link.classList.add(
-            'w-full',
-            'min-h-[46px]',
+            'w-[150px]',
+            'h-[150px]',
+            'flex',
+            'flex-col',
+            'items-center',
             'justify-center',
             'text-center',
             'text-[11px]',
             'md:text-xs',
-            'shadow-sm'
+            'shadow-sm',
+            'rounded-full'
         );
 
         linksGrid.appendChild(link);
