@@ -360,7 +360,18 @@
    
 
 
-   <div
+   <div id="mobileModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-2 md:p-4">
+  <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden animate-[fadeIn_0.3s_ease-out] flex flex-col max-h-[90vh]">
+    <div class="flex justify-between items-center p-5 border-b shrink-0">
+      <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight">Επιλέξτε Πάροχο</h3>
+      <button
+        type="button"
+        data-modal-close="mobileModal"
+        class="w-10 h-10 rounded-full bg-slate-100 hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-600 transition-colors"
+      >&times;</button>
+    </div>
+
+    <div
   id="mobileOffersProviderGrid"
   class="p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 overflow-y-auto custom-scroll"
   aria-live="polite"
@@ -369,8 +380,10 @@
     Φόρτωση παρόχων...
   </p>
 </div>
+  </div>
+</div>
 
-    <!-- VODAFONE - ΕΠΙΛΟΓΗ ΤΥΠΟΥ ΔΙΑΔΙΚΑΣΙΑΣ -->
+<!-- VODAFONE - ΕΠΙΛΟΓΗ ΤΥΠΟΥ ΔΙΑΔΙΚΑΣΙΑΣ -->
 <div id="vodaChoiceModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-4">
   <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden">
     
