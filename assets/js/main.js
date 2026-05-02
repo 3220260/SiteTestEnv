@@ -1658,63 +1658,6 @@ window.onpopstate = function (event) {
 
 /*''''''''''''+++++++++++++++++++++*/
 
-(function () {
-  function updateProcessShell(shell, stepIndex) {
-    const cards = Array.from(shell.querySelectorAll('[data-process-step-card]'));
-    if (!cards.length) return;
-
-    const safeIndex = Math.max(0, Math.min(stepIndex, cards.length - 1));
-    shell.dataset.currentStep = String(safeIndex);
-
-    cards.forEach((card, index) => {
-      card.classList.toggle('hidden', index !== safeIndex);
-    });
-
-    const activeCard = cards[safeIndex];
-    const title = activeCard.dataset.stepTitle || `Βήμα ${safeIndex + 1}`;
-
-    const headerStep = shell.querySelector('[data-process-header-step]');
-    if (headerStep) {
-      headerStep.textContent = `Βήμα ${safeIndex + 1}/${cards.length} · ${title}`;
-    }
-
-    const prevBtn = shell.querySelector('[data-process-prev]');
-    const nextBtn = shell.querySelector('[data-process-next]');
-
-    if (prevBtn) {
-      prevBtn.disabled = safeIndex === 0;
-    }
-
-    if (nextBtn) {
-      nextBtn.textContent = safeIndex === cards.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
-    }
-  }
-
-  document.addEventListener('click', function (event) {
-    const prevBtn = event.target.closest('[data-process-prev]');
-    const nextBtn = event.target.closest('[data-process-next]');
-    if (!prevBtn && !nextBtn) return;
-
-    const shell = event.target.closest('[data-process-shell]');
-    if (!shell) return;
-
-    const current = Number(shell.dataset.currentStep || 0);
-
-    if (prevBtn) {
-      updateProcessShell(shell, current - 1);
-    }
-
-    if (nextBtn) {
-      updateProcessShell(shell, current + 1);
-    }
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('[data-process-shell]').forEach((shell) => {
-      updateProcessShell(shell, Number(shell.dataset.currentStep || 0));
-    });
-  });
-})();
 
 (function () {
   function updateWizard(wizard, stepIndex) {
