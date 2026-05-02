@@ -1173,6 +1173,22 @@ function handleDocumentKeydown(event) {
     openModal(event.target.dataset.modalTarget);
 }
 
+function updateProcessModalTitle(showId) {
+    const titles = {
+        'v-port': 'Οδηγός Vodafone CU - Φορητότητα',
+        'v-new': 'Οδηγός Vodafone CU - Νέος αριθμός',
+        'n-port': 'Οδηγός NOVA Q - Φορητότητα',
+        'n-new': 'Οδηγός NOVA Q - Νέος αριθμός',
+    };
+
+    const titleId = showId.startsWith('v-') ? 'vodaProcessTitle' : 'novaProcessTitle';
+    const titleElement = document.getElementById(titleId);
+
+    if (titleElement && titles[showId]) {
+        titleElement.textContent = titles[showId];
+    }
+}
+
 function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
     document.getElementById(showId).classList.remove('hidden');
     document.getElementById(hideId).classList.add('hidden');
@@ -1185,6 +1201,7 @@ function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
     inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition";
     activeBtn.className = `flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-${color}-600 border-b-4 border-${color}-600 bg-white`;
 
+    updateProcessModalTitle(showId);
     resetProcessWizard(showId);
 }
 
