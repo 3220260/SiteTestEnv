@@ -1656,3 +1656,123 @@ window.onpopstate = function (event) {
     requestAnimationFrame(refreshVisibleOfferCards);
 };
 
+/*''''''''''''+++++++++++++++++++++*/
+
+(function () {
+  function updateProcessShell(shell, stepIndex) {
+    const cards = Array.from(shell.querySelectorAll('[data-process-step-card]'));
+    if (!cards.length) return;
+
+    const safeIndex = Math.max(0, Math.min(stepIndex, cards.length - 1));
+    shell.dataset.currentStep = String(safeIndex);
+
+    cards.forEach((card, index) => {
+      card.classList.toggle('hidden', index !== safeIndex);
+    });
+
+    const activeCard = cards[safeIndex];
+    const title = activeCard.dataset.stepTitle || `Βήμα ${safeIndex + 1}`;
+
+    const headerStep = shell.querySelector('[data-process-header-step]');
+    if (headerStep) {
+      headerStep.textContent = `Βήμα ${safeIndex + 1}/${cards.length} · ${title}`;
+    }
+
+    const prevBtn = shell.querySelector('[data-process-prev]');
+    const nextBtn = shell.querySelector('[data-process-next]');
+
+    if (prevBtn) {
+      prevBtn.disabled = safeIndex === 0;
+    }
+
+    if (nextBtn) {
+      nextBtn.textContent = safeIndex === cards.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    const prevBtn = event.target.closest('[data-process-prev]');
+    const nextBtn = event.target.closest('[data-process-next]');
+    if (!prevBtn && !nextBtn) return;
+
+    const shell = event.target.closest('[data-process-shell]');
+    if (!shell) return;
+
+    const current = Number(shell.dataset.currentStep || 0);
+
+    if (prevBtn) {
+      updateProcessShell(shell, current - 1);
+    }
+
+    if (nextBtn) {
+      updateProcessShell(shell, current + 1);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-process-shell]').forEach((shell) => {
+      updateProcessShell(shell, Number(shell.dataset.currentStep || 0));
+    });
+  });
+})();
+
+(function () {
+  function updateWizard(wizard, stepIndex) {
+    const steps = Array.from(wizard.querySelectorAll('[data-wizard-step]'));
+    if (!steps.length) return;
+
+    const safeIndex = Math.max(0, Math.min(stepIndex, steps.length - 1));
+    wizard.dataset.wizardCurrent = String(safeIndex);
+
+    steps.forEach((step, index) => {
+      step.classList.toggle('hidden', index !== safeIndex);
+    });
+
+    const activeStep = steps[safeIndex];
+    const title = activeStep.dataset.stepTitle || `Βήμα ${safeIndex + 1}`;
+
+    const wizardTitle = wizard.querySelector('[data-wizard-title]');
+    if (wizardTitle) {
+      wizardTitle.textContent = `Βήμα ${safeIndex + 1}/${steps.length} · ${title}`;
+    }
+
+    const prevBtn = wizard.querySelector('[data-wizard-prev]');
+    const nextBtn = wizard.querySelector('[data-wizard-next]');
+
+    if (prevBtn) {
+      prevBtn.disabled = safeIndex === 0;
+    }
+
+    if (nextBtn) {
+      nextBtn.textContent = safeIndex === steps.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    const prevBtn = event.target.closest('[data-wizard-prev]');
+    const nextBtn = event.target.closest('[data-wizard-next]');
+
+    if (!prevBtn && !nextBtn) return;
+
+    const wizard = event.target.closest('[data-wizard]');
+    if (!wizard) return;
+
+    event.preventDefault();
+
+    const current = Number(wizard.dataset.wizardCurrent || 0);
+
+    if (prevBtn) {
+      updateWizard(wizard, current - 1);
+    }
+
+    if (nextBtn) {
+      updateWizard(wizard, current + 1);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-wizard]').forEach((wizard) => {
+      updateWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
+    });
+  });
+})();
