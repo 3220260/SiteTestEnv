@@ -487,3 +487,63 @@ body.overflow-hidden { overflow: hidden !important; overscroll-behavior: none; }
     filter: none !important;
   }
 }
+
+/* Clean mobile process wizard */
+@media (max-width: 640px) {
+  [data-process-wizard="true"] {
+    padding: 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  [data-process-wizard="true"] [data-process-main-title],
+  [data-process-wizard="true"] [data-process-subtitle],
+  [data-process-wizard="true"] [data-process-step-title],
+  [data-process-wizard="true"] [data-process-total],
+  [data-process-wizard="true"] [data-process-current] {
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+  }
+
+  [data-process-wizard="true"] [data-process-subtitle] {
+    display: none !important;
+  }
+
+  [data-process-wizard="true"] [data-process-dots] {
+    margin: 0.75rem 0 !important;
+  }
+
+  [data-process-wizard="true"] [data-process-prev],
+  [data-process-wizard="true"] [data-process-next],
+  [data-process-wizard="true"] [data-process-change-choice] {
+    min-height: 44px !important;
+    font-size: 0.9rem !important;
+  }
+
+  #v-port .relative.flex,
+  #v-new .relative.flex,
+  #n-port .relative.flex,
+  #n-new .relative.flex {
+    gap: 0.75rem !important;
+  }
+
+  #v-port .relative.flex h4,
+  #v-new .relative.flex h4,
+  #n-port .relative.flex h4,
+  #n-new .relative.flex h4 {
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #v-port .relative.flex p,
+  #v-new .relative.flex p,
+  #n-port .relative.flex p,
+  #n-new .relative.flex p,
+  #v-port .relative.flex li,
+  #v-new .relative.flex li,
+  #n-port .relative.flex li,
+  #n-new .relative.flex li {
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+  }
+}
