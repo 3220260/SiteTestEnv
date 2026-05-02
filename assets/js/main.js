@@ -946,10 +946,102 @@ function createProcessWizard(containerId, config, theme, steps) {
     wizard.appendChild(dots);
     wizard.appendChild(stepBox);
     wizard.appendChild(actions);
+
+    const changeChoice = makeEl(
+        'button',
+        'mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-black text-slate-600 hover:bg-slate-50 transition',
+        'Αλλαγή επιλογής'
+    );
+    changeChoice.type = 'button';
+    changeChoice.dataset.processChangeChoice = '';
+    wizard.appendChild(changeChoice);
     wizard.appendChild(swipeHint);
 
     return wizard;
 }
+
+
+function buildProcessMailtoHref(config) {
+    const subject = `Δικαιολογητικά ${config.title} - ${config.subtitle}`;
+    const body = `Καλησπέρα σας,
+
+Σας αποστέλλω τα απαραίτητα δικαιολογητικά για ${config.title} - ${config.subtitle}.
+
+Ονοματεπώνυμο:
+Τηλέφωνο επικοινωνίας:`;
+
+    return `mailto:synetelas2025@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function enhanceProcessEmailActions(container, config) {
+    if (!container || !config) return;
+
+    const steps = getProcessSteps(container);
+
+    steps.forEach((step) => {
+        if (!step.textContent.includes('synetelas2025@gmail.com')) return;
+        if (step.querySelector('[data-email-actions="true"]')) return;
+
+        const card = step.querySelector('h4')?.parentElement || step;
+
+        const emailBox = makeEl(
+            'div',
+            'mt-4 rounded-2xl border-2 border-sky-100 bg-sky-50 p-4 shadow-sm'
+        );
+        emailBox.dataset.emailActions = 'true';
+
+        const title = makeEl(
+            'p',
+            'text-sm font-black text-sky-900 mb-3 flex items-center gap-2',
+            'Αποστολή δικαιολογητικών'
+        );
+
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-envelope-open-text text-sky-600';
+        title.prepend(icon);
+
+        const emailText = makeEl(
+            'p',
+            'text-xs font-bold text-slate-600 mb-3',
+            'Χρησιμοποίησε τα παρακάτω κουμπιά για να αποφύγεις λάθη στο email.'
+        );
+
+        const actions = makeEl('div', 'grid grid-cols-1 sm:grid-cols-2 gap-2');
+
+        const copyButton = makeEl(
+            'button',
+            'inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-sky-200 px-4 py-3 text-xs font-black text-sky-700 hover:bg-sky-100 transition',
+            'Αντιγραφή Email'
+        );
+        copyButton.type = 'button';
+        copyButton.dataset.copyEmail = 'synetelas2025@gmail.com';
+
+        const copyIcon = document.createElement('i');
+        copyIcon.className = 'fa-solid fa-copy';
+        copyButton.prepend(copyIcon);
+
+        const openEmail = makeEl(
+            'a',
+            'inline-flex items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-3 text-xs font-black text-white hover:bg-sky-700 transition shadow-sm',
+            'Άνοιγμα Email'
+        );
+        openEmail.href = buildProcessMailtoHref(config);
+
+        const openIcon = document.createElement('i');
+        openIcon.className = 'fa-solid fa-paper-plane';
+        openEmail.prepend(openIcon);
+
+        actions.appendChild(copyButton);
+        actions.appendChild(openEmail);
+
+        emailBox.appendChild(title);
+        emailBox.appendChild(emailText);
+        emailBox.appendChild(actions);
+
+        card.appendChild(emailBox);
+    });
+}
+
 
 function ensureProcessWizard(containerId) {
     const container = document.getElementById(containerId);
@@ -961,6 +1053,7 @@ function ensureProcessWizard(containerId) {
     if (!steps.length) return;
 
     moveDownloadBlockToPreparation(container, steps[0]);
+    enhanceProcessEmailActions(container, config);
 
     const theme = getProcessWizardTheme(config.color);
     const timeline = getProcessTimeline(container);
@@ -1106,6 +1199,20 @@ function handleDocumentClick(event) {
         return;
     }
 
+    const copyEmailTarget = event.target.closest('[data-copy-email]');
+    if (copyEmailTarget) {
+        event.preventDefault();
+
+        if (typeof copyToClipboard === 'function') {
+            copyToClipboard(copyEmailTarget.dataset.copyEmail, copyEmailTarget);
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(copyEmailTarget.dataset.copyEmail);
+            copyEmailTarget.textContent = 'Αντιγράφηκε!';
+        }
+
+        return;
+    }
+
     const copyTextTarget = event.target.closest('[data-copy-text]');
     if (copyTextTarget) {
         event.preventDefault();
@@ -1125,6 +1232,24 @@ function handleDocumentClick(event) {
             copy_type: 'iban',
         });
         copyIBAN(copyIbanTarget.dataset.copyIban, copyIbanTarget);
+        return;
+    }
+
+    const processChangeChoiceTarget = event.target.closest('[data-process-change-choice]');
+    if (processChangeChoiceTarget) {
+        event.preventDefault();
+
+        const wizard = processChangeChoiceTarget.closest('[data-process-wizard]');
+        const containerId = wizard?.dataset.processContainer;
+        const activeProcess = containerId ? document.getElementById(containerId) : null;
+        const currentModal = activeProcess?.closest('.modal-backdrop');
+        const choiceModalId = containerId?.startsWith('v-') ? 'vodaChoiceModal' : 'novaChoiceModal';
+
+        if (currentModal && document.getElementById(choiceModalId)) {
+            closeModal(currentModal.id, false);
+            openModal(choiceModalId);
+        }
+
         return;
     }
 
