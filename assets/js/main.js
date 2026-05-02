@@ -1654,3 +1654,83 @@ window.onpopstate = function (event) {
     requestAnimationFrame(refreshVisibleOfferCards);
 };
 
+(function () {
+  function getWizardLabel(wizard) {
+    const container = wizard.closest('#v-port, #v-new, #n-port, #n-new');
+    if (!container) return null;
+
+    if (container.id.startsWith('v-')) {
+      return document.querySelector('[data-wizard-header-label="voda"]');
+    }
+
+    return document.querySelector('[data-wizard-header-label="nova"]');
+  }
+
+  function updateWizard(wizard, nextIndex) {
+    const steps = Array.from(wizard.querySelectorAll('[data-wizard-step]'));
+    if (!steps.length) return;
+
+    const safeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
+    wizard.dataset.wizardCurrent = String(safeIndex);
+
+    steps.forEach((step, index) => {
+      step.classList.toggle('hidden', index !== safeIndex);
+    });
+
+    const currentStep = steps[safeIndex];
+    const title = currentStep.dataset.stepTitle || `Βήμα ${safeIndex + 1}`;
+
+    const headerLabel = getWizardLabel(wizard);
+    if (headerLabel) {
+      headerLabel.textContent = `Βήμα ${safeIndex + 1}/${steps.length} · ${title}`;
+    }
+
+    const prevButton = wizard.querySelector('[data-wizard-prev]');
+    const nextButton = wizard.querySelector('[data-wizard-next]');
+
+    if (prevButton) {
+      prevButton.disabled = safeIndex === 0;
+      prevButton.classList.toggle('opacity-40', safeIndex === 0);
+    }
+
+    if (nextButton) {
+      nextButton.textContent = safeIndex === steps.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    const goButton = event.target.closest('[data-wizard-go]');
+    const prevButton = event.target.closest('[data-wizard-prev]');
+    const nextButton = event.target.closest('[data-wizard-next]');
+
+    const button = goButton || prevButton || nextButton;
+    if (!button) return;
+
+    const wizard = button.closest('[data-wizard]');
+    if (!wizard) return;
+
+    event.preventDefault();
+
+    const current = Number(wizard.dataset.wizardCurrent || 0);
+
+    if (goButton) {
+      updateWizard(wizard, Number(goButton.dataset.wizardGo));
+      return;
+    }
+
+    if (prevButton) {
+      updateWizard(wizard, current - 1);
+      return;
+    }
+
+    if (nextButton) {
+      updateWizard(wizard, current + 1);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-wizard]').forEach((wizard) => {
+      updateWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
+    });
+  });
+})();

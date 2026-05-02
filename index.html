@@ -483,26 +483,7 @@
     <div id="vodaModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
 
-        <div class="bg-red-600 p-4 md:p-5 flex justify-between items-center text-white shrink-0 sticky top-0 z-20">
-  <h3 class="font-bold text-base md:text-xl flex flex-col md:flex-row md:items-center gap-1 md:gap-3 min-w-0">
-    <span class="flex items-center gap-2 min-w-0">
-      <i class="fa-solid fa-file-contract shrink-0"></i>
-      <span class="truncate">Διαδικασία Ενεργοποίησης Vodafone CU</span>
-      <span class="bg-white text-red-600 px-2.5 py-0.5 rounded-full text-xs md:text-sm font-black animate-pulse shadow-md whitespace-nowrap">
-        100€
-      </span>
-    </span>
-
-    <span
-      data-process-header-step="voda"
-      class="inline-flex w-fit items-center rounded-full bg-white/15 px-2.5 py-1 text-xs font-black text-white ring-1 ring-white/25 md:text-sm"
-    >
-      Βήμα 1/4 · Έγγραφα
-    </span>
-  </h3>
-
-  <button data-modal-close="vodaModal" class="text-white hover:text-red-200 text-2xl ml-4">&times;</button>
-</div>
+        
 
         <div class="hidden border-b border-gray-200 shrink-0 bg-gray-50">
             <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-red-600 border-b-4 border-red-600 bg-white" id="btn-v-port" data-tab-show="v-port" data-tab-hide="v-new" data-tab-active="btn-v-port" data-tab-inactive="btn-v-new">ΦΟΡΗΤΟΤΗΤΑ</button>
@@ -519,72 +500,7 @@
             data-wizard-current="0"
             class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
             >
-            <div class="border-b border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 px-4 md:px-8 py-5 md:py-6">
-                <div class="flex flex-col gap-4">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                    <div>
-                    <div class="flex items-center gap-2 flex-wrap mb-2">
-                        <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-            <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-          </div>
-                    <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
-                    <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
-                    </div>
-                    <div class="rounded-2xl bg-slate-100 px-4 py-3 min-w-[180px]">
-                    <div class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Τρέχον βήμα</div>
-                    <div data-wizard-current-label class="mt-1 text-base font-extrabold text-slate-900">Προετοιμασία εγγράφων</div>
-                    <div data-wizard-progress-label class="text-sm text-slate-500 mt-1">Βήμα 1 από 4</div>
-                    </div>
-                </div>
-
-                <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div data-wizard-progress-bar class="h-full rounded-full bg-slate-900 transition-all duration-300" style="width:25%"></div>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <button type="button" data-wizard-go="0" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                    <div class="flex items-center gap-3">
-                        <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-black">1</div>
-                        <div>
-                        <div data-wizard-indicator-label class="text-sm font-bold text-slate-900">Έγγραφα</div>
-                        <div class="text-xs text-slate-400">Συμπλήρωση</div>
-                        </div>
-                    </div>
-                    </button>
-
-                    <button type="button" data-wizard-go="1" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                    <div class="flex items-center gap-3">
-                        <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">2</div>
-                        <div>
-                        <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Κατάθεση</div>
-                        <div class="text-xs text-slate-400">Πληρωμή</div>
-                        </div>
-                    </div>
-                    </button>
-
-                    <button type="button" data-wizard-go="2" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                    <div class="flex items-center gap-3">
-                        <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">3</div>
-                        <div>
-                        <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Email</div>
-                        <div class="text-xs text-slate-400">Αποστολή</div>
-                        </div>
-                    </div>
-                    </button>
-
-                    <button type="button" data-wizard-go="3" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                    <div class="flex items-center gap-3">
-                        <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">4</div>
-                        <div>
-                        <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Ενεργοποίηση</div>
-                        <div class="text-xs text-slate-400">SIM / ολοκλήρωση</div>
-                        </div>
-                    </div>
-                    </button>
-                </div>
-                </div>
-            </div>
+            
 
             <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
                 <!-- STEP 1 -->
@@ -828,72 +744,7 @@
                 data-wizard-current="0"
                 class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
                 >
-                <div class="border-b border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 px-4 md:px-8 py-5 md:py-6">
-                    <div class="flex flex-col gap-4">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                        <div>
-                        <div class="flex items-center gap-2 flex-wrap mb-2">
-                            <span class="inline-flex items-center rounded-full bg-red-50 text-red-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">Vodafone CU</span>
-            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-            <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold">Νέος Αριθμός</span>
-          </div>
-                        <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
-                        <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
-                        </div>
-                        <div class="rounded-2xl bg-slate-100 px-4 py-3 min-w-[180px]">
-                        <div class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Τρέχον βήμα</div>
-                        <div data-wizard-current-label class="mt-1 text-base font-extrabold text-slate-900">Προετοιμασία εγγράφων</div>
-                        <div data-wizard-progress-label class="text-sm text-slate-500 mt-1">Βήμα 1 από 4</div>
-                        </div>
-                    </div>
-
-                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div data-wizard-progress-bar class="h-full rounded-full bg-slate-900 transition-all duration-300" style="width:25%"></div>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <button type="button" data-wizard-go="0" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                        <div class="flex items-center gap-3">
-                            <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-black">1</div>
-                            <div>
-                            <div data-wizard-indicator-label class="text-sm font-bold text-slate-900">Έγγραφα</div>
-                            <div class="text-xs text-slate-400">Συμπλήρωση</div>
-                            </div>
-                        </div>
-                        </button>
-
-                        <button type="button" data-wizard-go="1" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                        <div class="flex items-center gap-3">
-                            <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">2</div>
-                            <div>
-                            <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Κατάθεση</div>
-                            <div class="text-xs text-slate-400">Πληρωμή</div>
-                            </div>
-                        </div>
-                        </button>
-
-                        <button type="button" data-wizard-go="2" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                        <div class="flex items-center gap-3">
-                            <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">3</div>
-                            <div>
-                            <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Email</div>
-                            <div class="text-xs text-slate-400">Αποστολή</div>
-                            </div>
-                        </div>
-                        </button>
-
-                        <button type="button" data-wizard-go="3" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                        <div class="flex items-center gap-3">
-                            <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">4</div>
-                            <div>
-                            <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Ενεργοποίηση</div>
-                            <div class="text-xs text-slate-400">SIM / ολοκλήρωση</div>
-                            </div>
-                        </div>
-                        </button>
-                    </div>
-                    </div>
-                </div>
+               
 
                 
                     <!-- STEP 1 -->
@@ -1100,72 +951,7 @@
         data-wizard-current="0"
         class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
         >
-        <div class="border-b border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 px-4 md:px-8 py-5 md:py-6">
-            <div class="flex flex-col gap-4">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                <div>
-                <div class="flex items-center gap-2 flex-wrap mb-2">
-                    <span class="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">NOVA Q</span>
-            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-            <span class="inline-flex items-center rounded-full bg-amber-50 text-amber-700 px-3 py-1 text-xs font-bold">Φορητότητα</span>
-          </div>
-                <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
-                <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
-                </div>
-                <div class="rounded-2xl bg-slate-100 px-4 py-3 min-w-[180px]">
-                <div class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Τρέχον βήμα</div>
-                <div data-wizard-current-label class="mt-1 text-base font-extrabold text-slate-900">Προετοιμασία εγγράφων</div>
-                <div data-wizard-progress-label class="text-sm text-slate-500 mt-1">Βήμα 1 από 4</div>
-                </div>
-            </div>
-
-            <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-                <div data-wizard-progress-bar class="h-full rounded-full bg-slate-900 transition-all duration-300" style="width:25%"></div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <button type="button" data-wizard-go="0" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                <div class="flex items-center gap-3">
-                    <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-black">1</div>
-                    <div>
-                    <div data-wizard-indicator-label class="text-sm font-bold text-slate-900">Έγγραφα</div>
-                    <div class="text-xs text-slate-400">Συμπλήρωση</div>
-                    </div>
-                </div>
-                </button>
-
-                <button type="button" data-wizard-go="1" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                <div class="flex items-center gap-3">
-                    <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">2</div>
-                    <div>
-                    <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Κατάθεση</div>
-                    <div class="text-xs text-slate-400">Πληρωμή</div>
-                    </div>
-                </div>
-                </button>
-
-                <button type="button" data-wizard-go="2" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                <div class="flex items-center gap-3">
-                    <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">3</div>
-                    <div>
-                    <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Email</div>
-                    <div class="text-xs text-slate-400">Αποστολή</div>
-                    </div>
-                </div>
-                </button>
-
-                <button type="button" data-wizard-go="3" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-                <div class="flex items-center gap-3">
-                    <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">4</div>
-                    <div>
-                    <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Ενεργοποίηση</div>
-                    <div class="text-xs text-slate-400">SIM / ολοκλήρωση</div>
-                    </div>
-                </div>
-                </button>
-            </div>
-            </div>
-        </div>
+       
 
         <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
             <!-- STEP 1 -->
@@ -1373,72 +1159,7 @@
     data-wizard-current="0"
     class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
     >
-    <div class="border-b border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 px-4 md:px-8 py-5 md:py-6">
-        <div class="flex flex-col gap-4">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-            <div class="flex items-center gap-2 flex-wrap mb-2">
-                <span class="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-extrabold tracking-wide uppercase">NOVA Q</span>
-            <span class="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">100€ / 12 μήνες</span>
-            <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold">Νέος Αριθμός</span>
-          </div>
-            <h3 class="text-xl md:text-2xl font-black text-slate-900">Οδηγός ενεργοποίησης</h3>
-            <p class="text-sm text-slate-500 mt-1">Ακολούθησε τα 4 βήματα για να ολοκληρώσεις τη διαδικασία χωρίς να χαθείς.</p>
-            </div>
-            <div class="rounded-2xl bg-slate-100 px-4 py-3 min-w-[180px]">
-            <div class="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-400">Τρέχον βήμα</div>
-            <div data-wizard-current-label class="mt-1 text-base font-extrabold text-slate-900">Προετοιμασία εγγράφων</div>
-            <div data-wizard-progress-label class="text-sm text-slate-500 mt-1">Βήμα 1 από 4</div>
-            </div>
-        </div>
-
-        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div data-wizard-progress-bar class="h-full rounded-full bg-slate-900 transition-all duration-300" style="width:25%"></div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button type="button" data-wizard-go="0" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-            <div class="flex items-center gap-3">
-                <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-black">1</div>
-                <div>
-                <div data-wizard-indicator-label class="text-sm font-bold text-slate-900">Έγγραφα</div>
-                <div class="text-xs text-slate-400">Συμπλήρωση</div>
-                </div>
-            </div>
-            </button>
-
-            <button type="button" data-wizard-go="1" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-            <div class="flex items-center gap-3">
-                <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">2</div>
-                <div>
-                <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Κατάθεση</div>
-                <div class="text-xs text-slate-400">Πληρωμή</div>
-                </div>
-            </div>
-            </button>
-
-            <button type="button" data-wizard-go="2" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-            <div class="flex items-center gap-3">
-                <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">3</div>
-                <div>
-                <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Email</div>
-                <div class="text-xs text-slate-400">Αποστολή</div>
-                </div>
-            </div>
-            </button>
-
-            <button type="button" data-wizard-go="3" data-wizard-indicator class="text-left rounded-2xl border border-slate-200 bg-white p-3 hover:border-slate-300 transition">
-            <div class="flex items-center gap-3">
-                <div data-wizard-indicator-circle class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-black">4</div>
-                <div>
-                <div data-wizard-indicator-label class="text-sm font-bold text-slate-400">Ενεργοποίηση</div>
-                <div class="text-xs text-slate-400">SIM / ολοκλήρωση</div>
-                </div>
-            </div>
-            </button>
-        </div>
-        </div>
-    </div>
+   
 
     <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
         <!-- STEP 1 -->
