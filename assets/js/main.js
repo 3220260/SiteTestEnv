@@ -775,45 +775,21 @@ function ensureProcessWizard(containerId) {
         wizard.dataset.processContainer = containerId;
         wizard.className = `mb-5 rounded-2xl border ${theme.border} ${theme.bg} p-4 md:p-5 shadow-sm`;
 
-       wizard.innerHTML = `
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
-        <div>
-            <p class="text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Οδηγός βημάτων</p>
-            <h4 class="text-lg md:text-xl font-black text-slate-900">
-                <span data-process-main-title></span>
-            </h4>
-            <p class="text-xs font-bold ${theme.text}" data-process-subtitle></p>
-        </div>
-
-        <div class="text-xs font-black text-slate-500">
-            Βήμα <span data-process-current>1</span> από <span data-process-total>${steps.length}</span>
-        </div>
-    </div>
-
-    <div class="flex items-center gap-2 mb-4" data-process-dots></div>
-
-    <div class="bg-white rounded-xl border border-white/70 p-3 mb-4">
-        <p class="text-sm font-black text-slate-800" data-process-step-title></p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3">
-        <button
-            type="button"
-            data-process-prev
-            class="py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-            Πίσω
-        </button>
-
-        <button
-            type="button"
-            data-process-next
-            class="py-3 rounded-xl ${theme.button} text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-            Επόμενο
-        </button>
-    </div>
-`;
+       wizard.innerHTML =
+    '<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">' +
+        '<div>' +
+            '<p class="text-[10px] font-black uppercase tracking-[0.22em] text-slate-400">Οδηγός βημάτων</p>' +
+            '<h4 class="text-lg md:text-xl font-black text-slate-900"><span data-process-main-title></span></h4>' +
+            '<p class="text-xs font-bold ' + theme.text + '" data-process-subtitle></p>' +
+        '</div>' +
+        '<div class="text-xs font-black text-slate-500">Βήμα <span data-process-current>1</span> από <span data-process-total>' + steps.length + '</span></div>' +
+    '</div>' +
+    '<div class="flex items-center gap-2 mb-4" data-process-dots></div>' +
+    '<div class="bg-white rounded-xl border border-white/70 p-3 mb-4"><p class="text-sm font-black text-slate-800" data-process-step-title></p></div>' +
+    '<div class="grid grid-cols-2 gap-3">' +
+        '<button type="button" data-process-prev class="py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed">Πίσω</button>' +
+        '<button type="button" data-process-next class="py-3 rounded-xl ' + theme.button + ' text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed">Επόμενο</button>' +
+    '</div>';
 
         container.prepend(wizard);
     }
