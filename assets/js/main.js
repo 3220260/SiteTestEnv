@@ -700,6 +700,15 @@ function handleProcessWizardSwipeBack() {
         return true;
     }
 
+    const currentModal = activeProcess.closest('.modal-backdrop');
+    const choiceModalId = activeProcess.id.startsWith('v-') ? 'vodaChoiceModal' : 'novaChoiceModal';
+
+    if (currentModal && document.getElementById(choiceModalId)) {
+        closeModal(currentModal.id, false);
+        openModal(choiceModalId);
+        return true;
+    }
+
     return false;
 }
 
