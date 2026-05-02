@@ -832,9 +832,51 @@ function moveDownloadBlockToPreparation(container, firstStep) {
         .replaceAll('Κατεβάστε τα 2 απαραίτητα έντυπα:', 'Κατέβασε τα έγγραφα:')
         .replaceAll('Κατεβάστε το 1 απαραίτητο έντυπο:', 'Κατέβασε το έγγραφο:');
 
-    downloadBlock.querySelectorAll('a[href]').forEach((link) => {
-        link.classList.add('justify-center');
+    const documentLinks = Array.from(downloadBlock.querySelectorAll('a[href]'));
+
+    downloadBlock.textContent = '';
+    downloadBlock.className = 'mt-5 rounded-2xl border-2 border-amber-200 bg-amber-50 p-4 shadow-sm';
+    downloadBlock.dataset.downloadsMoved = 'true';
+
+    const downloadTitle = makeEl(
+        'p',
+        'text-sm font-black text-amber-900 mb-3 flex items-center gap-2',
+        'Πρώτα κατέβασε και συμπλήρωσε αυτά:'
+    );
+
+    const downloadIcon = document.createElement('i');
+    downloadIcon.className = 'fa-solid fa-download text-amber-600';
+    downloadTitle.prepend(downloadIcon);
+
+    const linksGrid = makeEl(
+        'div',
+        `grid grid-cols-1 ${documentLinks.length > 1 ? 'sm:grid-cols-2' : ''} gap-2`
+    );
+
+    documentLinks.forEach((link) => {
+        link.classList.remove('text-xs');
+        link.classList.add(
+            'w-full',
+            'min-h-[46px]',
+            'justify-center',
+            'text-center',
+            'text-[11px]',
+            'md:text-xs',
+            'shadow-sm'
+        );
+
+        linksGrid.appendChild(link);
     });
+
+    const nextHint = makeEl(
+        'p',
+        'mt-3 text-xs font-bold text-slate-600',
+        'Μετά πάτα “Επόμενο”.'
+    );
+
+    downloadBlock.appendChild(downloadTitle);
+    downloadBlock.appendChild(linksGrid);
+    downloadBlock.appendChild(nextHint);
 
     preparationCard.appendChild(downloadBlock);
 }
