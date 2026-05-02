@@ -974,7 +974,7 @@ function buildProcessMailtoHref(config) {
 Ονοματεπώνυμο:
 Τηλέφωνο επικοινωνίας:`;
 
-    return `mailto:synetelas2025@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return `mailto:synetelas2011@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 function enhanceProcessEmailActions(container, config) {
@@ -983,7 +983,7 @@ function enhanceProcessEmailActions(container, config) {
     const steps = getProcessSteps(container);
 
     steps.forEach((step) => {
-        if (!step.textContent.includes('synetelas2025@gmail.com')) return;
+        if (!step.textContent.includes('synetelas2011@gmail.com')) return;
         if (step.querySelector('[data-email-actions="true"]')) return;
 
         const card = step.querySelector('h4')?.parentElement || step;
@@ -1018,7 +1018,7 @@ function enhanceProcessEmailActions(container, config) {
             'Αντιγραφή Email'
         );
         copyButton.type = 'button';
-        copyButton.dataset.copyEmail = 'synetelas2025@gmail.com';
+        copyButton.dataset.copyEmail = 'synetelas2011@gmail.com';
 
         const copyIcon = document.createElement('i');
         copyIcon.className = 'fa-solid fa-copy';
