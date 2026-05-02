@@ -153,9 +153,9 @@
     button.textContent = procedure.label;
 
     if (procedure.style === 'brand') {
-      button.className = `w-full py-4 ${theme.bg} text-white rounded-xl font-bold ${theme.hoverBg} shadow-lg transition`;
+      button.className = `w-full min-h-[72px] px-5 py-5 ${theme.bg} text-white rounded-2xl font-black text-sm md:text-base ${theme.hoverBg} shadow-lg transition flex items-center justify-center text-center`;
     } else {
-      button.className = 'w-full py-4 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-900 shadow-lg transition';
+      button.className = 'w-full min-h-[72px] px-5 py-5 bg-slate-800 text-white rounded-2xl font-black text-sm md:text-base hover:bg-slate-900 shadow-lg transition flex items-center justify-center text-center';
     }
 
     return button;
