@@ -22,12 +22,13 @@
     <link rel="stylesheet" href="assets/css/tailwind.css?v=20260429-2">
     <link rel="stylesheet" href="assets/css/styles.css?v=20260429-6">
 
-<style>
-  #vodaModal .flex:has(#btn-v-port):has(#btn-v-new),
-  #novaModal .flex:has(#btn-n-port):has(#btn-n-new) {
+    <style>
+  #vodaModal .flex:has(> #btn-v-port):has(> #btn-v-new),
+  #novaModal .flex:has(> #btn-n-port):has(> #btn-n-new) {
     display: none !important;
   }
 </style>
+
 </head>
 <body class="loading">
 
@@ -579,7 +580,7 @@
             <button data-modal-close="vodaModal" class="text-white hover:text-red-200 text-2xl ml-4">&times;</button>
         </div>
 
-        <div class="flex border-b border-gray-200 shrink-0 bg-gray-50">
+        <div class="hidden border-b border-gray-200 shrink-0 bg-gray-50">
             <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-red-600 border-b-4 border-red-600 bg-white" id="btn-v-port" data-tab-show="v-port" data-tab-hide="v-new" data-tab-active="btn-v-port" data-tab-inactive="btn-v-new">ΦΟΡΗΤΟΤΗΤΑ</button>
             <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition" id="btn-v-new" data-tab-show="v-new" data-tab-hide="v-port" data-tab-active="btn-v-new" data-tab-inactive="btn-v-port">ΝΕΟΣ ΑΡΙΘΜΟΣ</button>
         </div>
@@ -846,7 +847,7 @@
     <button data-modal-close="novaModal" class="text-white hover:text-blue-200 text-2xl">&times;</button>
     </div>
 
-    <div class="flex border-b border-gray-200 shrink-0 bg-gray-50">
+    <div class="hidden border-b border-gray-200 shrink-0 bg-gray-50"></div>
     <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-blue-600 border-b-4 border-blue-600 bg-white" id="btn-n-port" data-tab-show="n-port" data-tab-hide="n-new" data-tab-active="btn-n-port" data-tab-inactive="btn-n-new">ΦΟΡΗΤΟΤΗΤΑ</button>
     <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition" id="btn-n-new" data-tab-show="n-new" data-tab-hide="n-port" data-tab-active="btn-n-new" data-tab-inactive="btn-n-port">ΝΕΟΣ ΑΡΙΘΜΟΣ</button>
     </div>
