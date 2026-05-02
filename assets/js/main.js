@@ -1085,6 +1085,15 @@ function ensureProcessWizard(containerId) {
     showProcessWizardStep(containerId, processWizardState[containerId] || 0);
 }
 
+function updateProcessHeaderStep(containerId, stepIndex, totalSteps, stepTitle) {
+  const provider = containerId.startsWith('v-') ? 'voda' : 'nova';
+  const badge = document.querySelector(`[data-process-header-step="${provider}"]`);
+
+  if (!badge) return;
+
+  badge.textContent = `Βήμα ${stepIndex + 1}/${totalSteps} · ${stepTitle}`;
+}
+
 function showProcessWizardStep(containerId, index) {
     const container = document.getElementById(containerId);
     const config = PROCESS_WIZARDS[containerId];
@@ -1106,8 +1115,12 @@ function showProcessWizardStep(containerId, index) {
     const wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
     if (!wizard) return;
 
-    const current = wizard.querySelector('[data-process-current]');
-    const stepTitle = wizard.querySelector('[data-process-step-title]');
+    const currentStepTitle = getProcessStepTitle(steps[safeIndex], safeIndex);
+
+    if (current) current.textContent = safeIndex + 1;
+    if (stepTitle) stepTitle.textContent = currentStepTitle;
+
+    updateProcessHeaderStep(containerId, safeIndex, steps.length, currentStepTitle);
     const dots = wizard.querySelector('[data-process-dots]');
     const prev = wizard.querySelector('[data-process-prev]');
     const next = wizard.querySelector('[data-process-next]');
