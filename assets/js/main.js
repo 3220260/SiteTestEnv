@@ -894,10 +894,17 @@ function createProcessWizard(containerId, config, theme, steps) {
     actions.appendChild(prev);
     actions.appendChild(next);
 
+    const swipeHint = makeEl(
+        'p',
+        'md:hidden mt-3 text-center text-[11px] font-bold text-slate-500',
+        'Σύρε δεξιά για προηγούμενο βήμα'
+    );
+
     wizard.appendChild(header);
     wizard.appendChild(dots);
     wizard.appendChild(stepBox);
     wizard.appendChild(actions);
+    wizard.appendChild(swipeHint);
 
     return wizard;
 }
