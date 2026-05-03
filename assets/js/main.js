@@ -1098,12 +1098,13 @@ function ensureProcessWizard(containerId) {
 }
 
 function updateProcessHeaderStep(containerId, stepIndex, totalSteps, stepTitle) {
-  const provider = containerId.startsWith('v-') ? 'voda' : 'nova';
-  const badge = document.querySelector(`[data-process-header-step="${provider}"]`);
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-  if (!badge) return;
+  const titleElement = container.querySelector('[data-wizard-title]');
+  if (!titleElement) return;
 
-  badge.textContent = `Βήμα ${stepIndex + 1}/${totalSteps} · ${stepTitle}`;
+  titleElement.textContent = `Βήμα ${stepIndex + 1}/${totalSteps} · ${stepTitle}`;
 }
 
 function showProcessWizardStep(containerId, index) {
