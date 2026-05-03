@@ -448,66 +448,64 @@
 
     <!-- NOVA - ΕΠΙΛΟΓΗ ΤΥΠΟΥ ΔΙΑΔΙΚΑΣΙΑΣ -->
     <div id="novaChoiceModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-4">
-  <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col" style="height: 300px;">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col" style="height: 300px;">
 
     <div class="bg-orange-500 p-5 flex justify-between items-center text-white border-b border-orange-900">
-      <h3 class="font-black text-lg">
-        <i class="fa-solid fa-file-contract mr-2"></i>
-        NOVA Q - Δικαιολογητικά
-      </h3>
+    <h3 class="font-black text-lg">
+    <i class="fa-solid fa-file-contract mr-2"></i>
+    NOVA Q - Δικαιολογητικά
+    </h3>
 
-      <button
-        type="button"
-        data-modal-close="novaChoiceModal"
-        class="text-white hover:text-red-200 text-2xl"
-        aria-label="Κλείσιμο"
-      >
-        &times;
-      </button>
+    <button
+    type="button"
+    data-modal-close="novaChoiceModal"
+    class="text-white hover:text-red-200 text-2xl"
+    aria-label="Κλείσιμο"
+    >
+    &times;
+    </button>
     </div>
 
     <div class="p-6 bg-slate-50">
-      <p class="text-sm  font-semibold text-slate-500 mb-5 text-center">
-        Επιλέξτε τύπο διαδικασίας <br>
-        (πάρε νέο νούμερο ή κράτα το δικό σου)
-      </p>
+    <p class="text-sm  font-semibold text-slate-500 mb-5 text-center">
+    Επιλέξτε τύπο διαδικασίας <br>
+    (πάρε νέο νούμερο ή κράτα το δικό σου)
+    </p>
 
-      <div
-        id="novaChoiceOptions"
-        class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
-      ></div>
+    <div
+    id="novaChoiceOptions"
+    class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+    ></div>
     </div>
 
-  </div>
-</div>
+    </div>
+    </div>
+
     <div id="vodaModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div class="flex border-b border-rose-500 shrink-0 bg-">
+        <button
+            class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-blue-700 border-b-4 border-orange-500 bg-white"
+            id="btn-v-port"
+            data-tab-show="v-port"
+            data-tab-hide="v-new"
+            data-tab-active="btn-v-port"
+            data-tab-inactive="btn-v-new"
+        >
+            ΦΟΡΗΤΟΤΗΤΑ
+        </button>
 
-
-
-    <div class="flex border-b border-orange-200 shrink-0 bg-orange-50">
-  <button
-    class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-blue-700 border-b-4 border-orange-500 bg-white"
-    id="btn-n-port"
-    data-tab-show="n-port"
-    data-tab-hide="n-new"
-    data-tab-active="btn-n-port"
-    data-tab-inactive="btn-n-new"
-  >
-    ΦΟΡΗΤΟΤΗΤΑ
-  </button>
-
-  <button
-    class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-slate-500 hover:bg-orange-100 transition"
-    id="btn-n-new"
-    data-tab-show="n-new"
-    data-tab-hide="n-port"
-    data-tab-active="btn-n-new"
-    data-tab-inactive="btn-n-port"
-  >
-    ΝΕΟΣ ΑΡΙΘΜΟΣ
-  </button>
-</div>
+        <button
+            class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-slate-500 hover:bg-orange-100 transition"
+            id="btn-v-new"
+            data-tab-show="v-new"
+            data-tab-hide="v-port"
+            data-tab-active="btn-v-new"
+            data-tab-inactive="btn-v-port"
+        >
+            ΝΕΟΣ ΑΡΙΘΜΟΣ
+        </button>
+    </div>
 
     <div class="overflow-y-auto p-4 md:p-8 bg-white grow custom-scroll overflow-x-hidden">
 
@@ -1045,9 +1043,8 @@
 
     </div> 
 
-
-<!-- ====================== neo nova modal arxi ========== -->
- <div id="novaModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
+    <!-- ====================== neo nova modal arxi ========== -->
+    <div id="novaModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
 
         
@@ -1068,7 +1065,7 @@
         class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
         >
 
-       <div class="bg-orange-50 text-slate-900 px-4 md:px-6 py-4 flex items-center justify-between gap-3 border-b border-orange-100">
+        <div class="bg-orange-50 text-slate-900 px-4 md:px-6 py-4 flex items-center justify-between gap-3 border-b border-orange-100">
         <div>
         <p class="text-[11px] md:text-xs font-black uppercase tracking-wider text-white/70">
         Οδηγός Ενεργοποίησης
@@ -1078,7 +1075,7 @@
         </h3>
         </div>
 
-         <span
+            <span
             class="rounded-full bg-orange-500 px-4 py-1.5 text-xs font-black shadow-sm"
             style="color: #2563eb; border: 4px solid #f97316;"
             >
@@ -1144,7 +1141,7 @@
         </div>
         </article>
 
-       
+        
 
         <!-- CARD 2 -->
         <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
@@ -1298,27 +1295,27 @@
         </div>
 
         <div class="sticky bottom-0 bg-white border-t border-slate-200 p-4 flex gap-3 justify-between">
-  <button
+    <button
     type="button"
     data-wizard-prev
     class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 font-black text-slate-700 disabled:opacity-40"
-  >
+    >
     Πίσω
-  </button>
+    </button>
 
-  <button
+    <button
     type="button"
     data-wizard-next
     class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-black"
-  >
+    >
     Επόμενο
-  </button>
-</div>
+    </button>
+    </div>
         </section> 
                 
             </div> 
-          
-          
+            
+            
     <div id="n-new" class="hidden space-y-6">
         <section
         data-wizard
@@ -1326,7 +1323,7 @@
         class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
         >
 
-       <div class="bg-orange-50 text-slate-900 px-4 md:px-6 py-4 flex items-center justify-between gap-3 border-b border-orange-100">
+        <div class="bg-orange-50 text-slate-900 px-4 md:px-6 py-4 flex items-center justify-between gap-3 border-b border-orange-100">
         <div>
         <p class="text-[11px] md:text-xs font-black uppercase tracking-wider text-white/70">
         Οδηγός Ενεργοποίησης
@@ -1336,7 +1333,7 @@
         </h3>
         </div>
 
-         <span
+            <span
             class="rounded-full bg-orange-500 px-4 py-1.5 text-xs font-black shadow-sm"
             style="color: #2563eb; border: 4px solid #f97316;"
             >
@@ -1527,11 +1524,11 @@
     </div> 
     </div> 
     </div> 
-                  
+                    
                 
     </div>
 
-<!-- ====================== neo nova modal telos  ========== -->
+    <!-- ====================== neo nova modal telos  ========== -->
 
 
 
