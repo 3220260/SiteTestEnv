@@ -1395,18 +1395,24 @@ function updateProcessModalTitle(showId) {
 }
 
 function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
-    document.getElementById(showId).classList.remove('hidden');
-    document.getElementById(hideId).classList.add('hidden');
-    const activeBtn = document.getElementById(activeBtnId);
-    const inactiveBtn = document.getElementById(inactiveBtnId);
-    
-   const isVoda = activeBtnId.includes('v-') || activeBtnId === 'btn-v-port';
-   const color = isVoda ? 'red' : 'orange';
+  document.getElementById(showId).classList.remove('hidden');
+  document.getElementById(hideId).classList.add('hidden');
 
+  const activeBtn = document.getElementById(activeBtnId);
+  const inactiveBtn = document.getElementById(inactiveBtnId);
+
+  const isVoda = activeBtnId.includes('v-') || activeBtnId === 'btn-v-port';
+
+  if (isVoda) {
+    inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition";
+    activeBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-red-600 border-b-4 border-red-600 bg-white";
+  } else {
     inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-orange-700 bg-orange-100 hover:bg-orange-200 transition";
-    activeBtn.className = `flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-white border-b-4 border-orange-700 bg-orange-500 hover:bg-orange-600 transition`;
-    updateProcessModalTitle(showId);
-    resetProcessWizard(showId);
+    activeBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-white border-b-4 border-orange-700 bg-orange-500 hover:bg-orange-600 transition";
+  }
+
+  updateProcessModalTitle(showId);
+  resetProcessWizard(showId);
 }
 
 /* =========================================
