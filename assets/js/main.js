@@ -796,19 +796,11 @@ function getProcessTimeline(container) {
 }
 
 function getProcessSteps(container) {
-    const timeline = getProcessTimeline(container);
-    if (!timeline) return [];
-
-    return Array.from(timeline.children).filter((child) => {
-        return child.classList.contains('relative') &&
-            child.classList.contains('flex') &&
-            child.querySelector('h4');
-    });
+    return Array.from(container.querySelectorAll('[data-process-step]'));
 }
 
 function getProcessStepTitle(step, index) {
-    const title = step.querySelector('h4');
-    return title ? title.textContent.trim().replace(/^\d+\.\s*/, '') : `Βήμα ${index + 1}`;
+    return step.dataset.stepTitle || `Βήμα ${index + 1}`;
 }
 
 function moveDownloadBlockToPreparation(container, firstStep) {
@@ -1098,13 +1090,13 @@ function ensureProcessWizard(containerId) {
 }
 
 function updateProcessHeaderStep(containerId, stepIndex, totalSteps, stepTitle) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-  const titleElement = container.querySelector('[data-wizard-title]');
-  if (!titleElement) return;
+    const titleElement = container.querySelector('[data-process-title]');
+    if (!titleElement) return;
 
-  titleElement.textContent = `Βήμα ${stepIndex + 1}/${totalSteps} · ${stepTitle}`;
+    titleElement.textContent = `Βήμα ${stepIndex + 1}/${totalSteps} · ${stepTitle}`;
 }
 
 function showProcessWizardStep(containerId, index) {
@@ -1125,29 +1117,30 @@ function showProcessWizardStep(containerId, index) {
         step.classList.toggle('hidden', stepIndex !== safeIndex);
     });
 
-    const wizard = Array.from(container.children).find((child) => child.dataset.processWizard === 'true');
-if (!wizard) return;
+    const wizard = container.querySelector('[data-process-wizard]');
+    if (!wizard) return;
 
-const current = wizard.querySelector('[data-process-current]');
-const stepTitle = wizard.querySelector('[data-process-step-title]');
-const currentStepTitle = getProcessStepTitle(steps[safeIndex], safeIndex);
+    const current = wizard.querySelector('[data-process-current]');
+    const stepTitle = wizard.querySelector('[data-process-step-title]');
+    const currentStepTitle = getProcessStepTitle(steps[safeIndex], safeIndex);
 
-if (current) current.textContent = safeIndex + 1;
-if (stepTitle) stepTitle.textContent = currentStepTitle;
+    if (current) current.textContent = safeIndex + 1;
+    if (stepTitle) stepTitle.textContent = currentStepTitle;
 
-updateProcessHeaderStep(containerId, safeIndex, steps.length, currentStepTitle);
+    updateProcessHeaderStep(containerId, safeIndex, steps.length, currentStepTitle);
+
     const dots = wizard.querySelector('[data-process-dots]');
     const prev = wizard.querySelector('[data-process-prev]');
     const next = wizard.querySelector('[data-process-next]');
-
-    if (current) current.textContent = safeIndex + 1;
-    if (stepTitle) stepTitle.textContent = getProcessStepTitle(steps[safeIndex], safeIndex);
 
     if (dots) {
         dots.innerHTML = '';
 
         steps.forEach((_, dotIndex) => {
-            const dot = makeEl('span', `h-2 flex-1 rounded-full ${dotIndex <= safeIndex ? theme.dotActive : theme.dotInactive}`);
+            const dot = makeEl(
+                'span',
+                `h-2 flex-1 rounded-full ${dotIndex <= safeIndex ? theme.dotActive : theme.dotInactive}`
+            );
             dots.appendChild(dot);
         });
     }
@@ -1180,6 +1173,7 @@ function activateVisibleProcessWizard(root) {
 
 
 function handleDocumentClick(event) {
+
     const stopTarget = event.target.closest('[data-stop-click]');
     if (stopTarget) event.stopPropagation();
 
