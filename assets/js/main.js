@@ -1655,17 +1655,14 @@ window.onpopstate = function (event) {
     unlockPageScrollIfIdle();
     requestAnimationFrame(refreshVisibleOfferCards);
 };
-
-/* --- SIMPLE CARD WIZARD: data-wizard / data-wizard-step --- */
+/* --- HARD FIX: wizard navigation guard --- */
 (function () {
   function getWizardSteps(wizard) {
     return Array.from(wizard.querySelectorAll('[data-wizard-step]'))
-      .sort((a, b) => {
-        return Number(a.dataset.wizardStep) - Number(b.dataset.wizardStep);
-      });
+      .sort((a, b) => Number(a.dataset.wizardStep) - Number(b.dataset.wizardStep));
   }
 
-  function updateWizard(wizard, stepIndex) {
+  function updateFixedWizard(wizard, stepIndex) {
     const steps = getWizardSteps(wizard);
     if (!steps.length) return;
 
@@ -1696,37 +1693,50 @@ window.onpopstate = function (event) {
     }
   }
 
-  document.addEventListener('click', function (event) {
+  function handleFixedWizardClick(event) {
     const prevBtn = event.target.closest('[data-wizard-prev]');
     const nextBtn = event.target.closest('[data-wizard-next]');
 
     if (!prevBtn && !nextBtn) return;
 
-    const wizard = event.target.closest('[data-wizard]');
+    const button = prevBtn || nextBtn;
+    const wizard = button.closest('[data-wizard]');
     if (!wizard) return;
 
     event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    if (button.disabled) return;
+
+    const now = Date.now();
+    const lastClick = Number(wizard.dataset.lastWizardClick || 0);
+
+    if (now - lastClick < 350) return;
+
+    wizard.dataset.lastWizardClick = String(now);
 
     const current = Number(wizard.dataset.wizardCurrent || 0);
 
     if (prevBtn) {
-      updateWizard(wizard, current - 1);
+      updateFixedWizard(wizard, current - 1);
+      return;
     }
 
-    if (nextBtn) {
-      updateWizard(wizard, current + 1);
-    }
-  });
+    updateFixedWizard(wizard, current + 1);
+  }
 
-  function initWizards() {
+  function initFixedWizards() {
     document.querySelectorAll('[data-wizard]').forEach((wizard) => {
-      updateWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
+      updateFixedWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
     });
   }
 
+  document.addEventListener('click', handleFixedWizardClick, true);
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWizards, { once: true });
+    document.addEventListener('DOMContentLoaded', initFixedWizards, { once: true });
   } else {
-    initWizards();
+    initFixedWizards();
   }
 })();
