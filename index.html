@@ -486,26 +486,8 @@
         
 
         <div class="hidden border-b border-gray-200 shrink-0 bg-gray-50">
-    <button
-        id="btn-n-port"
-        data-modal-close="novaChoiceModal"
-        data-modal-target="novaProcessModal"
-        data-open-tab-show="n-port"
-        data-open-tab-hide="n-new"
-        data-open-tab-active="btn-n-port"
-        data-open-tab-inactive="btn-n-new">
-        ΦΟΡΗΤΟΤΗΤΑ
-    </button>
-    <button
-        id="btn-n-new"
-        data-modal-close="novaChoiceModal"
-        data-modal-target="novaProcessModal"
-        data-open-tab-show="n-new"
-        data-open-tab-hide="n-port"
-        data-open-tab-active="btn-n-new"
-        data-open-tab-inactive="btn-n-port">
-        ΝΕΟΣ ΑΡΙΘΜΟΣ
-    </button>
+            <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-red-600 border-b-4 border-red-600 bg-white" id="btn-v-port" data-tab-show="v-port" data-tab-hide="v-new" data-tab-active="btn-v-port" data-tab-inactive="btn-v-new">ΦΟΡΗΤΟΤΗΤΑ</button>
+            <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition" id="btn-v-new" data-tab-show="v-new" data-tab-hide="v-port" data-tab-active="btn-v-new" data-tab-inactive="btn-v-port">ΝΕΟΣ ΑΡΙΘΜΟΣ</button>
         </div>
 
         <div class="overflow-y-auto p-4 md:p-8 bg-white grow custom-scroll overflow-x-hidden">
@@ -1019,318 +1001,426 @@
     </div> 
  
     <div id="novaModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
-  <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
 
-    <div class="bg-blue-700 p-4 md:p-5 flex justify-between items-center text-white shrink-0">
-      <h3 class="font-bold text-lg md:text-xl flex items-center gap-3 min-w-0">
-        <i class="fa-solid fa-file-contract shrink-0"></i>
-        <span class="truncate">NOVA Q - Δικαιολογητικά</span>
-      </h3>
-      <button data-modal-close="novaModal" class="text-white hover:text-blue-200 text-2xl ml-4">&times;</button>
-    </div>
+    
 
-    <div class="hidden border-b border-gray-200 shrink-0 bg-gray-50">
-      <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-blue-600 border-b-4 border-blue-600 bg-white" id="btn-n-port" data-tab-show="n-port" data-tab-hide="n-new" data-tab-active="btn-n-port" data-tab-inactive="btn-n-new">ΦΟΡΗΤΟΤΗΤΑ</button>
-      <button class="flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition" id="btn-n-new" data-tab-show="n-new" data-tab-hide="n-port" data-tab-active="btn-n-new" data-tab-inactive="btn-n-port">ΝΕΟΣ ΑΡΙΘΜΟΣ</button>
-    </div>
+    
 
     <div class="overflow-y-auto p-4 md:p-8 bg-white grow custom-scroll overflow-x-hidden">
 
-      <!-- NOVA Q - ΦΟΡΗΤΟΤΗΤΑ -->
-      <div id="n-port" class="block space-y-6 md:space-y-8 p-1 md:p-2">
-       <section
-                data-wizard
-                data-wizard-current="0"
-                class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
-                            >
-                        <div class="bg-blue-700 text-white px-4 md:px-6 py-4 flex items-center justify-between gap-3">
-                    <div>
-                        <p class="text-[11px] md:text-xs font-black uppercase tracking-wider text-white/70">
-                        Οδηγός Ενεργοποίησης
-                        </p>
-                        <h3 data-wizard-title class="text-base md:text-lg font-black">
-                        Βήμα 1/4 · Προετοιμασία εγγράφων
-                        </h3>
-                    </div>
-
-                    <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-black ring-1 ring-white/20">
-                        NOVA Q
-                    </span>
-                    </div>
-
-                    <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
-
-            <div data-wizard-step="0" data-step-title="Προετοιμασία εγγράφων" class="space-y-4">
-              <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 items-stretch">
-
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-start justify-between gap-3 mb-4">
-                    <div>
-                      <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">Υποχρεωτικό</span>
-                      <h4 class="mt-3 text-base font-black text-slate-900">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q</h4>
-                      <p class="mt-1 text-sm text-slate-500">Συμπληρώστε την ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q.</p>
-                    </div>
-                    <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
-                      <i class="fa-solid fa-file-signature"></i>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 gap-2 mt-auto">
-                    <button type="button" data-preview-src="assets/images/exYDQ.png" class="w-full min-h-[52px] rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center text-center">Προβολή Παραδείγματος</button>
-                    <a href="assets/docs/ypefthini_dilosi_Q.pdf" download="ypefthini_dilosi_Q.pdf" class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center">Λήψη Εντύπου</a>
-                  </div>
-                </article>
-
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-start justify-between gap-3 mb-4">
-                    <div>
-                      <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">Υποχρεωτικό</span>
-                      <h4 class="mt-3 text-base font-black text-slate-900">ΑΙΤΗΣΗ & ΑΠΟΔΕΙΞΗ ΦΟΡΗΤΟΤΗΤΑΣ Q</h4>
-                      <p class="mt-1 text-sm text-slate-500">Συμπληρώστε την αίτηση και απόδειξη φορητότητας Q.</p>
-                    </div>
-                    <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
-                      <i class="fa-solid fa-right-left"></i>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 gap-2 mt-auto">
-                    <button type="button" data-preview-src="assets/images/exPDQ.png" class="w-full min-h-[52px] rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center text-center">Προβολή Παραδείγματος</button>
-                    <a href="assets/docs/aitisi_apodixi_foritotitas_kinitis_Q.pdf" download="aitisi_apodixi_foritotitas_kinitis_Q.pdf" class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center">Λήψη Εντύπου</a>
-                  </div>
-                </article>
-
-              </div>
-
-              <div class="rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
-                <div class="flex items-start gap-3">
-                  <i class="fa-solid fa-circle-info mt-1"></i>
-                  <div>
-                    <div class="font-extrabold">Προσοχή</div>
-                    <p class="text-sm mt-1">Στο έντυπο ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q πρέπει να επικυρωθεί η υπογραφή είτε ηλεκτρονικά στο gov.gr είτε σε ΚΕΠ.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div data-wizard-step="1" data-step-title="Κατάθεση" class="hidden space-y-4">
-              <div class="grid gap-4 md:grid-cols-2">
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-center justify-between gap-3 mb-4">
-                    <div>
-                      <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
-                      <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-building-columns text-slate-700"></i></div>
-                  </div>
-                  <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
-                  <button type="button" data-copy-iban="GR5801720500005050099524664" class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2">
-                    <i class="fa-regular fa-copy icon-copy"></i><i class="fa-solid fa-check icon-check hidden"></i><span>Αντιγραφή IBAN</span>
-                  </button>
-                </article>
-
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-center justify-between gap-3 mb-4">
-                    <div>
-                      <div class="text-sm font-bold text-slate-500">Ποσό</div>
-                      <div class="text-base font-black text-slate-900">100€</div>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-euro-sign text-slate-700"></i></div>
-                  </div>
-                  <p class="text-sm text-slate-600">Κράτησε το αποδεικτικό κατάθεσης, γιατί θα το στείλεις μαζί με τα έντυπα στο email.</p>
-                </article>
-              </div>
-            </div>
-
-            <div data-wizard-step="2" data-step-title="Αποστολή email" class="hidden space-y-4">
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <div class="text-sm font-bold text-slate-500">Email αποστολής</div>
-                    <div class="text-lg md:text-xl font-black text-slate-900 break-all">synetelas2011@gmail.com</div>
-                    <p class="text-sm text-slate-500 mt-1">Στείλε όλα τα έγγραφα και το αποδεικτικό κατάθεσης σε ένα email.</p>
-                  </div>
-                  <a href="mailto:synetelas2011@gmail.com" class="rounded-2xl bg-slate-900 text-white px-5 py-3 font-bold text-center hover:bg-slate-800 transition">Άνοιγμα Email</a>
-                </div>
-              </div>
-
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <h4 class="text-base font-black text-slate-900 mb-3">Checklist αποστολής</h4>
-                <ul class="space-y-3 text-sm text-slate-600">
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q</span></li>
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΑΙΤΗΣΗ & ΑΠΟΔΕΙΞΗ ΦΟΡΗΤΟΤΗΤΑΣ Q</span></li>
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΦΩΤΟΤΥΠΙΑ ΤΑΥΤΟΤΗΤΑΣ (Μπρος-Πίσω)</span></li>
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΑΠΟΔΕΙΚΤΙΚΟ ΚΑΤΑΘΕΣΗΣ</span></li>
-                </ul>
-              </div>
-            </div>
-
-            <div data-wizard-step="3" data-step-title="Ενεργοποίηση SIM" class="hidden space-y-4">
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <div class="flex items-center gap-3 mb-4">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-black">4</div>
-                  <div>
-                    <h4 class="text-base font-black text-slate-900">Τελική ενεργοποίηση</h4>
-                    <p class="text-sm text-slate-500">Ολοκλήρωσε τη διαδικασία όταν παραλάβεις τη νέα SIM.</p>
-                  </div>
-                </div>
-                <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
-                  <li>Τοποθέτησε τη νέα SIM.</li>
-                  <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
-                  <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
-                </ol>
-              </div>
-              <div data-wizard-complete-state class="hidden rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
-                <div class="font-extrabold">Τέλεια — έφτασες στο τέλος της διαδικασίας.</div>
-                <p class="text-sm mt-1">Αν όλα τα βήματα έχουν ολοκληρωθεί, απομένει μόνο η παραλαβή και ενεργοποίηση της SIM.</p>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="sticky bottom-0 bg-white border-t border-slate-200 p-4 flex gap-3 justify-between">
-            <button type="button" data-wizard-prev class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 font-black text-slate-700 disabled:opacity-40">Πίσω</button>
-            <button type="button" data-wizard-next class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-black">Επόμενο</button>
-          </div>
-
-        </section>
-      </div>
-
-      <!-- NOVA Q - ΝΕΟΣ ΑΡΙΘΜΟΣ -->
-    <div id="n-new" class="hidden space-y-6 md:space-y-8 p-1 md:p-2">
-    <section
+    <div id="n-port" class="block space-y-6 md:space-y-8 animate-[fadeIn_0.4s_ease-out] p-1 md:p-2">
+        <section
         data-wizard
         data-wizard-current="0"
         class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
-    >
-        <div class="bg-blue-700 text-white px-4 md:px-6 py-4 flex items-center justify-between gap-3">
-        <div>
-            <p class="text-[11px] md:text-xs font-black uppercase tracking-wider text-white/70">
-            Οδηγός Ενεργοποίησης
-            </p>
-            <h3 data-wizard-title class="text-base md:text-lg font-black">
-            Βήμα 1/4 · Προετοιμασία εγγράφων
-            </h3>
-        </div>
+        >
+       
 
-        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-black ring-1 ring-white/20">
-            NOVA Q
-        </span>
-        </div>
+        
+
+
+
 
         <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
+            <!-- STEP 1 -->
+           <div data-wizard-step="0" data-step-title="Προετοιμασία εγγράφων" class="space-y-4">
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 items-stretch">
 
-            <div data-wizard-step="0" data-step-title="Προετοιμασία εγγράφων" class="space-y-4">
-              <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 items-stretch">
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-start justify-between gap-3 mb-4">
-                    <div>
-                      <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">Υποχρεωτικό</span>
-                      <h4 class="mt-3 text-base font-black text-slate-900">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q</h4>
-                      <p class="mt-1 text-sm text-slate-500">Συμπληρώστε την ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q.</p>
-                    </div>
-                    <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0"><i class="fa-solid fa-file-signature"></i></div>
-                  </div>
-                  <div class="grid grid-cols-1 gap-2 mt-auto">
-                    <button type="button" data-preview-src="assets/images/exYDQ.png" class="w-full min-h-[52px] rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center text-center">Προβολή Παραδείγματος</button>
-                    <a href="assets/docs/ypefthini_dilosi_Q.pdf" download="ypefthini_dilosi_Q.pdf" class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center">Λήψη Εντύπου</a>
-                  </div>
-                </article>
-              </div>
+   <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+  <div class="flex items-start justify-between gap-3 mb-4">
+    <div>
+      <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">
+        Υποχρεωτικό
+      </span>
 
-              <div class="rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
-                <div class="flex items-start gap-3">
-                  <i class="fa-solid fa-circle-info mt-1"></i>
-                  <div>
-                    <div class="font-extrabold">Προσοχή</div>
-                    <p class="text-sm mt-1">Στο έντυπο ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q πρέπει να επικυρωθεί η υπογραφή είτε ηλεκτρονικά στο gov.gr είτε σε ΚΕΠ.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <h4 class="mt-3 text-base font-black text-slate-900">
+        ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q
+      </h4>
 
-            <div data-wizard-step="1" data-step-title="Κατάθεση" class="hidden space-y-4">
-              <div class="grid gap-4 md:grid-cols-2">
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-center justify-between gap-3 mb-4">
-                    <div>
-                      <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
-                      <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-building-columns text-slate-700"></i></div>
-                  </div>
-                  <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
-                  <button type="button" data-copy-iban="GR5801720500005050099524664" class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2">
-                    <i class="fa-regular fa-copy icon-copy"></i><i class="fa-solid fa-check icon-check hidden"></i><span>Αντιγραφή IBAN</span>
-                  </button>
-                </article>
+      <p class="mt-1 text-sm text-slate-500">
+        Συμπληρώστε την ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q.
+      </p>
+    </div>
 
-                <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                  <div class="flex items-center justify-between gap-3 mb-4">
-                    <div>
-                      <div class="text-sm font-bold text-slate-500">Ποσό</div>
-                      <div class="text-base font-black text-slate-900">100€</div>
-                    </div>
-                    <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-euro-sign text-slate-700"></i></div>
-                  </div>
-                  <p class="text-sm text-slate-600">Κράτησε το αποδεικτικό κατάθεσης, γιατί θα το στείλεις μαζί με τα έντυπα στο email.</p>
-                </article>
-              </div>
-            </div>
+    <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+      <i class="fa-solid fa-file-signature"></i>
+    </div>
+  </div>
 
-            <div data-wizard-step="2" data-step-title="Αποστολή email" class="hidden space-y-4">
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <div class="text-sm font-bold text-slate-500">Email αποστολής</div>
-                    <div class="text-lg md:text-xl font-black text-slate-900 break-all">synetelas2011@gmail.com</div>
-                    <p class="text-sm text-slate-500 mt-1">Στείλε όλα τα έγγραφα και το αποδεικτικό κατάθεσης σε ένα email.</p>
-                  </div>
-                  <a href="mailto:synetelas2011@gmail.com" class="rounded-2xl bg-slate-900 text-white px-5 py-3 font-bold text-center hover:bg-slate-800 transition">Άνοιγμα Email</a>
-                </div>
-              </div>
+  <div class="grid grid-cols-1 gap-2 mt-auto">
+    <button
+      type="button"
+      data-preview-src="assets/images/exYDQ.png"
+      class="w-full min-h-[52px] rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center text-center"
+    >
+      Προβολή Παραδείγματος
+    </button>
 
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <h4 class="text-base font-black text-slate-900 mb-3">Checklist αποστολής</h4>
-                <ul class="space-y-3 text-sm text-slate-600">
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q</span></li>
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΦΩΤΟΤΥΠΙΑ ΤΑΥΤΟΤΗΤΑΣ (Μπρος-Πίσω)</span></li>
-                  <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΑΠΟΔΕΙΚΤΙΚΟ ΚΑΤΑΘΕΣΗΣ</span></li>
-                </ul>
-              </div>
-            </div>
+    <a
+  href="assets/docs/ypefthini_dilosi_Q.pdf"
+  download="ypefthini_dilosi_Q.pdf"
+  class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center"
+>
+  Λήψη Εντύπου
+</a>
+  </div>
+</article>
 
-            <div data-wizard-step="3" data-step-title="Ενεργοποίηση SIM" class="hidden space-y-4">
-              <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
-                <div class="flex items-center gap-3 mb-4">
-                  <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-black">4</div>
-                  <div>
-                    <h4 class="text-base font-black text-slate-900">Τελική ενεργοποίηση</h4>
-                    <p class="text-sm text-slate-500">Ολοκλήρωσε τη διαδικασία όταν παραλάβεις τη νέα SIM.</p>
-                  </div>
-                </div>
-                <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
-                  <li>Τοποθέτησε τη νέα SIM.</li>
-                  <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
-                  <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
-                </ol>
-              </div>
-              <div data-wizard-complete-state class="hidden rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
-                <div class="font-extrabold">Τέλεια — έφτασες στο τέλος της διαδικασίας.</div>
-                <p class="text-sm mt-1">Αν όλα τα βήματα έχουν ολοκληρωθεί, απομένει μόνο η παραλαβή και ενεργοποίηση της SIM.</p>
-              </div>
-            </div>
+    <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">
+            Υποχρεωτικό
+          </span>
 
-          </div>
+          <h4 class="mt-3 text-base font-black text-slate-900">
+            ΑΙΤΗΣΗ & ΑΠΟΔΕΙΞΗ ΦΟΡΗΤΟΤΗΤΑΣ Q
+          </h4>
 
-          <div class="sticky bottom-0 bg-white border-t border-slate-200 p-4 flex gap-3 justify-between">
-            <button type="button" data-wizard-prev class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 font-black text-slate-700 disabled:opacity-40">Πίσω</button>
-            <button type="button" data-wizard-next class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-black">Επόμενο</button>
-          </div>
+          <p class="mt-1 text-sm text-slate-500">
+            Συμπληρώστε την αίτηση και απόδειξη φορητότητας Q.
+          </p>
+        </div>
 
-        </section>
+        <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+          <i class="fa-solid fa-right-left"></i>
+        </div>
       </div>
 
+      <div class="grid grid-cols-1 gap-2 mt-auto">
+        <button data-preview-src="assets/images/exPDQ.png"
+          type="button"
+          class="w-full rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition"
+        >
+          Προβολή Παραδείγματος
+        </button>
+
+        <a
+          href="assets/docs/aitisi_apodixi_foritotitas_kinitis_Q.pdf"
+          download
+          class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center"
+        >
+          Λήψη Εντύπου
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
+    <div class="flex items-start gap-3">
+      <i class="fa-solid fa-circle-info mt-1"></i>
+      <div>
+        <div class="font-extrabold">Προσοχή</div>
+        <p class="text-sm mt-1">
+          Στο έντυπο ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q πρέπει να επικυρωθεί η υπογραφή
+          είτε ηλεκτρονικά στο gov.gr είτε σε ΚΕΠ.
+        </p>
+      </div>
     </div>
   </div>
 </div>
+
+            <!-- STEP 2 -->
+            <div data-wizard-step="1" data-step-title="Κατάθεση" class="hidden space-y-4">
+            <div class="grid gap-4 md:grid-cols-2">
+                 <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                        <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
+                        <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-building-columns text-slate-700"></i>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
+                    <button
+                        type="button"
+                        data-copy-iban="GR5801720500005050099524664"
+                        class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2"
+                        >
+                        <i class="fa-regular fa-copy icon-copy"></i>
+                        <i class="fa-solid fa-check icon-check hidden"></i>
+                        <span>Αντιγραφή IBAN</span>
+                    </button>
+                    </article>
+                    <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                        <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
+                        <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-building-columns text-slate-700"></i>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
+                    <button
+                        type="button"
+                        data-copy-iban="GR5801720500005050099524664"
+                        class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2"
+                        >
+                        <i class="fa-regular fa-copy icon-copy"></i>
+                        <i class="fa-solid fa-check icon-check hidden"></i>
+                        <span>Αντιγραφή IBAN</span>
+                    </button>
+                    </article>
+            </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div data-wizard-step="2" data-step-title="Αποστολή email" class="hidden space-y-4">
+            <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="text-sm font-bold text-slate-500">Email αποστολής</div>
+                    <div class="text-lg md:text-xl font-black text-slate-900">synetelas2011@gmail.com</div>
+                    <p class="text-sm text-slate-500 mt-1">Στείλε όλα τα έγγραφα και το αποδεικτικό κατάθεσης σε ένα email.</p>
+                </div>
+                <a href="mailto:synetelas2011@gmail.com" class="rounded-2xl bg-slate-900 text-white px-5 py-3 font-bold text-center hover:bg-slate-800 transition">Άνοιγμα Email</a>
+                </div>
+            </div>
+
+            <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                <h4 class="text-base font-black text-slate-900 mb-3">Checklist αποστολής</h4>
+                <ul class="space-y-3 text-sm text-slate-600">
+                <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</span></li>
+                <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΠΡΟΣΩΠΙΚΑ ΔΕΔΟΜΕΝΑ</span></li>
+                <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΑΠΟΔΕΙΚΤΙΚΟ ΚΑΤΑΘΕΣΗΣ</span></li>
+                <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΦΩΤΟΤΥΠΙΑ ΤΑΥΤΟΤΗΤΑΣ (Μπρος-Πίσω)</span></li>
+                </ul>
+            </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div data-wizard-step="3" data-step-title="Ενεργοποίηση SIM" class="hidden space-y-4">
+            <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-black">4</div>
+                <div>
+                    <h4 class="text-base font-black text-slate-900">Τελική ενεργοποίηση</h4>
+                    <p class="text-sm text-slate-500">Ολοκλήρωσε τη διαδικασία όταν παραλάβεις τη νέα SIM.</p>
+                </div>
+                </div>
+                <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
+                <li>Τοποθέτησε τη νέα SIM.</li>
+                <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
+                <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
+                </ol>
+            </div>
+
+            <div data-wizard-complete-state class="hidden rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
+                <div class="font-extrabold">Τέλεια — έφτασες στο τέλος της διαδικασίας.</div>
+                <p class="text-sm mt-1">Αν όλα τα βήματα έχουν ολοκληρωθεί, απομένει μόνο η παραλαβή και ενεργοποίηση της SIM.</p>
+            </div>
+            </div>
+        </div>
+        <button
+    type="button"
+    data-wizard-prev
+    class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 font-black text-slate-700 disabled:opacity-40"
+  >
+    Πίσω
+  </button>
+
+  <button
+    type="button"
+    data-wizard-next
+    class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-black"
+  >
+    Επόμενο
+  </button>
+        </section>
+        
+    </div>
+     <div id="n-new" class="hidden space-y-6 md:space-y-8 p-1 md:p-2">
+    
+    <section
+    data-wizard
+    data-wizard-current="0"
+    class="rounded-[28px] bg-white border border-slate-200 shadow-[0_24px_80px_rgba(15,23,42,0.10)] overflow-hidden"
+    >
+   
+
+    <div class="px-4 md:px-8 py-5 md:py-8 bg-slate-50">
+        <!-- STEP 1 -->
+       <div data-wizard-step="0" data-step-title="Προετοιμασία εγγράφων" class="space-y-4">
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3 items-stretch">
+
+    <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <span class="inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide">
+            Υποχρεωτικό
+          </span>
+
+          <h4 class="mt-3 text-base font-black text-slate-900">
+            ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q
+          </h4>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Συμπληρώστε την ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q.
+          </p>
+        </div>
+
+        <div class="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
+          <i class="fa-solid fa-file-signature"></i>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-2 mt-auto">
+         <button data-preview-src="assets/images/exYDQ.png"
+          type="button"
+          class="w-full rounded-2xl bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition"
+        >
+          Προβολή Παραδείγματος
+        </button>
+
+        <a
+          href="assets/docs/ypefthini_dilosi_Q.pdf"
+          class="w-full min-h-[52px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center font-bold text-slate-700 hover:border-slate-300 transition flex items-center justify-center"
+        >
+          Λήψη Εντύπου
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="rounded-3xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
+    <div class="flex items-start gap-3">
+      <i class="fa-solid fa-circle-info mt-1"></i>
+      <div>
+        <div class="font-extrabold">Προσοχή</div>
+        <p class="text-sm mt-1">
+          Στο έντυπο ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ Q πρέπει να επικυρωθεί η υπογραφή
+          είτε ηλεκτρονικά στο gov.gr είτε σε ΚΕΠ.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- STEP 2 -->
+        <div data-wizard-step="1" data-step-title="Κατάθεση" class="hidden space-y-4">
+        <div class="grid gap-4 md:grid-cols-2">
+             <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                        <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
+                        <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-building-columns text-slate-700"></i>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
+                    <button
+                        type="button"
+                        data-copy-iban="GR5801720500005050099524664"
+                        class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2"
+                        >
+                        <i class="fa-regular fa-copy icon-copy"></i>
+                        <i class="fa-solid fa-check icon-check hidden"></i>
+                        <span>Αντιγραφή IBAN</span>
+                    </button>
+                    </article>
+                    <article class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                        <div class="text-sm font-bold text-slate-500">Δικαιούχος</div>
+                        <div class="text-base font-black text-slate-900">SOUTH ATTICA TELECOMMUNICATIONS</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
+                        <i class="fa-solid fa-building-columns text-slate-700"></i>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm font-bold text-slate-700">ΠΕΙΡΑΙΩΣ — GR5801720500005050099524664</div>
+                    <button
+                        type="button"
+                        data-copy-iban="GR5801720500005050099524664"
+                        class="mt-4 w-full rounded-2xl border border-slate-200 bg-slate-900 text-white px-4 py-3 font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2"
+                        >
+                        <i class="fa-regular fa-copy icon-copy"></i>
+                        <i class="fa-solid fa-check icon-check hidden"></i>
+                        <span>Αντιγραφή IBAN</span>
+                    </button>
+                    </article>
+        </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div data-wizard-step="2" data-step-title="Αποστολή email" class="hidden space-y-4">
+        <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <div class="text-sm font-bold text-slate-500">Email αποστολής</div>
+                <div class="text-lg md:text-xl font-black text-slate-900">synetelas2011@gmail.com</div>
+                <p class="text-sm text-slate-500 mt-1">Στείλε όλα τα έγγραφα και το αποδεικτικό κατάθεσης σε ένα email.</p>
+            </div>
+            <a href="mailto:synetelas2011@gmail.com" class="rounded-2xl bg-slate-900 text-white px-5 py-3 font-bold text-center hover:bg-slate-800 transition">Άνοιγμα Email</a>
+            </div>
+        </div>
+
+        <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+            <h4 class="text-base font-black text-slate-900 mb-3">Checklist αποστολής</h4>
+            <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</span></li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΑΠΟΔΕΙΚΤΙΚΟ ΚΑΤΑΘΕΣΗΣ</span></li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex w-5 h-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span><span>ΦΩΤΟΤΥΠΙΑ ΤΑΥΤΟΤΗΤΑΣ (Μπρος-Πίσω)</span></li>
+            </ul>
+        </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div data-wizard-step="3" data-step-title="Ενεργοποίηση SIM" class="hidden space-y-4">
+        <div class="rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full">
+            <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl font-black">4</div>
+            <div>
+                <h4 class="text-base font-black text-slate-900">Τελική ενεργοποίηση</h4>
+                <p class="text-sm text-slate-500">Ολοκλήρωσε τη διαδικασία όταν παραλάβεις τη νέα SIM.</p>
+            </div>
+            </div>
+            <ol class="space-y-3 text-sm text-slate-600 list-decimal list-inside">
+            <li>Τοποθέτησε τη νέα SIM.</li>
+            <li>Κάλεσε στο <span class="font-black text-slate-900">12200</span>.</li>
+            <li>Μετά την κλήση, κάνε επανεκκίνηση της συσκευής.</li>
+            </ol>
+        </div>
+
+        <div data-wizard-complete-state class="hidden rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
+            <div class="font-extrabold">Τέλεια — έφτασες στο τέλος της διαδικασίας.</div>
+            <p class="text-sm mt-1">Αν όλα τα βήματα έχουν ολοκληρωθεί, απομένει μόνο η παραλαβή και ενεργοποίηση της SIM.</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="sticky bottom-0 bg-white border-t border-slate-200 p-4 flex gap-3 justify-between">
+  <button
+    type="button"
+    data-wizard-prev
+    class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 font-black text-slate-700 disabled:opacity-40"
+  >
+    Πίσω
+  </button>
+
+  <button
+    type="button"
+    data-wizard-next
+    class="flex-1 rounded-2xl bg-slate-900 text-white px-4 py-3 font-black"
+  >
+    Επόμενο
+  </button>
+</div>
+    </section>   
+        
+        
+    </div> 
+</div> </div> 
+    </div> 
 
     <div id="novaLinePhone" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
