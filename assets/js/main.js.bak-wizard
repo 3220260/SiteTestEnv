@@ -1656,17 +1656,12 @@ window.onpopstate = function (event) {
     requestAnimationFrame(refreshVisibleOfferCards);
 };
 
-/* --- SIMPLE CARD WIZARD: data-wizard / data-wizard-step --- */
-(function () {
-  function getWizardSteps(wizard) {
-    return Array.from(wizard.querySelectorAll('[data-wizard-step]'))
-      .sort((a, b) => {
-        return Number(a.dataset.wizardStep) - Number(b.dataset.wizardStep);
-      });
-  }
+/*''''''''''''+++++++++++++++++++++*/
 
+
+(function () {
   function updateWizard(wizard, stepIndex) {
-    const steps = getWizardSteps(wizard);
+    const steps = Array.from(wizard.querySelectorAll('[data-wizard-step]'));
     if (!steps.length) return;
 
     const safeIndex = Math.max(0, Math.min(stepIndex, steps.length - 1));
@@ -1718,15 +1713,9 @@ window.onpopstate = function (event) {
     }
   });
 
-  function initWizards() {
+  document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-wizard]').forEach((wizard) => {
       updateWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
     });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWizards, { once: true });
-  } else {
-    initWizards();
-  }
+  });
 })();
