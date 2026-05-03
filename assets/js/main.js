@@ -746,30 +746,42 @@ function handleSwipeBackTouchEnd(event) {
 const PROCESS_WIZARDS = Object.freeze({
     'v-port': { title: 'Vodafone CU', subtitle: 'Φορητότητα', color: 'red' },
     'v-new': { title: 'Vodafone CU', subtitle: 'Νέος αριθμός', color: 'red' },
-    'n-port': { title: 'NOVA Q', subtitle: 'Φορητότητα', color: 'blue' },
-    'n-new': { title: 'NOVA Q', subtitle: 'Νέος αριθμός', color: 'blue' },
+    'n-port': { title: 'NOVA Q', subtitle: 'Φορητότητα', color: 'orange' },
+    'n-new': { title: 'NOVA Q', subtitle: 'Νέος αριθμός', color: 'orange' },
 });
 
 const processWizardState = {};
-
 function getProcessWizardTheme(color) {
-    return color === 'blue'
-        ? {
+    if (color === 'blue') {
+        return {
             border: 'border-blue-100',
             bg: 'bg-blue-50',
             text: 'text-blue-700',
             button: 'bg-blue-600 hover:bg-blue-700',
             dotActive: 'bg-blue-600',
             dotInactive: 'bg-slate-300',
-        }
-        : {
-            border: 'border-red-100',
-            bg: 'bg-red-50',
-            text: 'text-red-700',
-            button: 'bg-red-600 hover:bg-red-700',
-            dotActive: 'bg-red-600',
+        };
+    }
+
+    if (color === 'orange') {
+        return {
+            border: 'border-orange-100',
+            bg: 'bg-orange-50',
+            text: 'text-orange-700',
+            button: 'bg-orange-500 hover:bg-orange-600',
+            dotActive: 'bg-orange-500',
             dotInactive: 'bg-slate-300',
         };
+    }
+
+    return {
+        border: 'border-red-100',
+        bg: 'bg-red-50',
+        text: 'text-red-700',
+        button: 'bg-red-600 hover:bg-red-700',
+        dotActive: 'bg-red-600',
+        dotInactive: 'bg-slate-300',
+    };
 }
 
 function makeEl(tag, className = '', text = '') {
@@ -1388,12 +1400,11 @@ function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
     const activeBtn = document.getElementById(activeBtnId);
     const inactiveBtn = document.getElementById(inactiveBtnId);
     
-    const isVoda = activeBtnId.includes('v-') || activeBtnId === 'btn-v-port';
-    const color = isVoda ? 'red' : 'blue';
-    
-    inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-gray-500 hover:bg-gray-100 transition";
-    activeBtn.className = `flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-${color}-600 border-b-4 border-${color}-600 bg-white`;
+   const isVoda = activeBtnId.includes('v-') || activeBtnId === 'btn-v-port';
+   const color = isVoda ? 'red' : 'orange';
 
+    inactiveBtn.className = "flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-orange-700 bg-orange-100 hover:bg-orange-200 transition";
+    activeBtn.className = `flex-1 py-3 md:py-4 font-bold text-xs md:text-sm text-white border-b-4 border-orange-700 bg-orange-500 hover:bg-orange-600 transition`;
     updateProcessModalTitle(showId);
     resetProcessWizard(showId);
 }
@@ -1655,88 +1666,3 @@ window.onpopstate = function (event) {
     unlockPageScrollIfIdle();
     requestAnimationFrame(refreshVisibleOfferCards);
 };
-/* --- HARD FIX: wizard navigation guard --- */
-(function () {
-  function getWizardSteps(wizard) {
-    return Array.from(wizard.querySelectorAll('[data-wizard-step]'))
-      .sort((a, b) => Number(a.dataset.wizardStep) - Number(b.dataset.wizardStep));
-  }
-
-  function updateFixedWizard(wizard, stepIndex) {
-    const steps = getWizardSteps(wizard);
-    if (!steps.length) return;
-
-    const safeIndex = Math.max(0, Math.min(stepIndex, steps.length - 1));
-    wizard.dataset.wizardCurrent = String(safeIndex);
-
-    steps.forEach((step, index) => {
-      step.classList.toggle('hidden', index !== safeIndex);
-    });
-
-    const activeStep = steps[safeIndex];
-    const title = activeStep.dataset.stepTitle || `Βήμα ${safeIndex + 1}`;
-
-    const wizardTitle = wizard.querySelector('[data-wizard-title]');
-    if (wizardTitle) {
-      wizardTitle.textContent = `Βήμα ${safeIndex + 1}/${steps.length} · ${title}`;
-    }
-
-    const prevBtn = wizard.querySelector('[data-wizard-prev]');
-    const nextBtn = wizard.querySelector('[data-wizard-next]');
-
-    if (prevBtn) {
-      prevBtn.disabled = safeIndex === 0;
-    }
-
-    if (nextBtn) {
-      nextBtn.textContent = safeIndex === steps.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
-    }
-  }
-
-  function handleFixedWizardClick(event) {
-    const prevBtn = event.target.closest('[data-wizard-prev]');
-    const nextBtn = event.target.closest('[data-wizard-next]');
-
-    if (!prevBtn && !nextBtn) return;
-
-    const button = prevBtn || nextBtn;
-    const wizard = button.closest('[data-wizard]');
-    if (!wizard) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-
-    if (button.disabled) return;
-
-    const now = Date.now();
-    const lastClick = Number(wizard.dataset.lastWizardClick || 0);
-
-    if (now - lastClick < 350) return;
-
-    wizard.dataset.lastWizardClick = String(now);
-
-    const current = Number(wizard.dataset.wizardCurrent || 0);
-
-    if (prevBtn) {
-      updateFixedWizard(wizard, current - 1);
-      return;
-    }
-
-    updateFixedWizard(wizard, current + 1);
-  }
-
-  function initFixedWizards() {
-    document.querySelectorAll('[data-wizard]').forEach((wizard) => {
-      updateFixedWizard(wizard, Number(wizard.dataset.wizardCurrent || 0));
-    });
-  }
-
-  document.addEventListener('click', handleFixedWizardClick, true);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFixedWizards, { once: true });
-  } else {
-    initFixedWizards();
-  }
-})();
