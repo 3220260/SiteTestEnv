@@ -933,10 +933,7 @@ function createProcessWizard(containerId, config, theme, steps) {
     left.appendChild(label);
     left.appendChild(stepTitle);
 
-    const right = makeEl(
-        'div',
-        'flex items-center gap-2 shrink-0'
-    );
+    const right = makeEl('div', 'flex items-center gap-2 shrink-0');
 
     const companyBadge = makeEl(
         'span',
