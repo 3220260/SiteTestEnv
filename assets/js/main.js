@@ -1155,8 +1155,8 @@ function showProcessWizardStep(containerId, index) {
     updateProcessHeaderStep(containerId, safeIndex, steps.length, currentStepTitle);
 
     const dots = wizard.querySelector('[data-process-dots]');
-    const prev = wizard.querySelector('[data-process-prev]');
-    const next = wizard.querySelector('[data-process-next]');
+    const prev = container.querySelector('[data-process-prev]');
+    const next = container.querySelector('[data-process-next]');
 
     if (dots) {
         dots.innerHTML = '';
