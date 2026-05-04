@@ -1415,11 +1415,18 @@ function updateProcessModalTitle(showId) {
 }
 
 function switchTab(showId, hideId, activeBtnId, inactiveBtnId) {
-  document.getElementById(showId).classList.remove('hidden');
-  document.getElementById(hideId).classList.add('hidden');
-
+  const show = document.getElementById(showId);
+  const hide = document.getElementById(hideId);
   const activeBtn = document.getElementById(activeBtnId);
   const inactiveBtn = document.getElementById(inactiveBtnId);
+
+  if (!show || !hide || !activeBtn || !inactiveBtn) {
+    console.warn('switchTab missing element', { showId, hideId, activeBtnId, inactiveBtnId });
+    return;
+  }
+
+  show.classList.remove('hidden');
+  hide.classList.add('hidden');
 
   const isVoda = activeBtnId.includes('v-') || activeBtnId === 'btn-v-port';
 
