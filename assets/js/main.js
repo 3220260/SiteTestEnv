@@ -890,84 +890,112 @@ function moveDownloadBlockToPreparation(container, firstStep) {
 }
 
 function createProcessWizard(containerId, config, theme, steps) {
-    const wizard = makeEl('div', `mb-5 rounded-2xl border ${theme.border} ${theme.bg} p-4 md:p-5 shadow-sm`);
+    const isVoda = containerId.startsWith('v-');
+    const modalId = isVoda ? 'vodaModal' : 'novaModal';
+    const choiceModalId = isVoda ? 'vodaChoiceModal' : 'novaChoiceModal';
+
+    const companyBadgeClass = isVoda
+        ? 'bg-red-600 text-white border-red-300'
+        : 'bg-orange-500 text-blue-700 border-orange-300';
+
+    const closeButtonClass = isVoda
+        ? 'w-10 h-10 rounded-full bg-red-600 text-white text-2xl font-black flex items-center justify-center hover:bg-red-700 transition border-2 border-red-300 shadow-md'
+        : 'w-10 h-10 rounded-full bg-orange-100 text-blue-700 text-2xl font-black flex items-center justify-center hover:bg-orange-200 transition border-2 border-orange-300 shadow-md';
+
+    const wizard = makeEl(
+        'div',
+        `mb-4 rounded-2xl border ${theme.border} ${theme.bg} p-3 md:p-5 shadow-sm`
+    );
+
     wizard.dataset.processWizard = 'true';
     wizard.dataset.processContainer = containerId;
 
-    const header = makeEl('div', 'flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4');
+    const header = makeEl(
+        'div',
+        'flex items-start justify-between gap-3 mb-3'
+    );
 
-    const titleWrap = makeEl('div');
-    titleWrap.appendChild(makeEl('p', 'text-[10px] font-black uppercase tracking-[0.22em] text-slate-400', 'Οδηγός βημάτων'));
+    const left = makeEl('div', 'min-w-0');
 
-    const title = makeEl('h4', 'text-lg md:text-xl font-black text-slate-900');
-    const mainTitle = makeEl('span');
-    mainTitle.dataset.processMainTitle = '';
-    mainTitle.textContent = config.title;
-    title.appendChild(mainTitle);
-    titleWrap.appendChild(title);
+    const label = makeEl(
+        'p',
+        'text-[10px] md:text-xs font-black uppercase tracking-[0.18em] text-slate-500',
+        'ΟΔΗΓΟΣ ΕΝΕΡΓΟΠΟΙΗΣΗΣ'
+    );
 
-    const subtitle = makeEl('p', `text-xs font-bold ${theme.text}`, config.subtitle);
-    subtitle.dataset.processSubtitle = '';
-    titleWrap.appendChild(subtitle);
+    const stepTitle = makeEl(
+        'h4',
+        'mt-1 text-base md:text-lg font-black text-slate-900 leading-tight'
+    );
+    stepTitle.dataset.processStepTitle = '';
+    stepTitle.textContent = getProcessStepTitle(steps[0], 0);
 
-    const counter = makeEl('div', 'text-xs font-black text-slate-500');
+    left.appendChild(label);
+    left.appendChild(stepTitle);
+
+    const right = makeEl(
+        'div',
+        'flex items-center gap-2 shrink-0'
+    );
+
+    const companyBadge = makeEl(
+        'span',
+        `hidden sm:inline-flex rounded-full px-3 py-1 text-xs font-black border-2 shadow-sm ${companyBadgeClass}`,
+        config.title
+    );
+    companyBadge.dataset.processMainTitle = '';
+
+    const closeButton = makeEl(
+        'button',
+        closeButtonClass,
+        '×'
+    );
+    closeButton.type = 'button';
+    closeButton.dataset.modalClose = modalId;
+    closeButton.dataset.modalTarget = choiceModalId;
+    closeButton.setAttribute('aria-label', 'Πίσω στην επιλογή διαδικασίας');
+
+    right.appendChild(companyBadge);
+    right.appendChild(closeButton);
+
+    header.appendChild(left);
+    header.appendChild(right);
+
+    const mobileBadge = makeEl(
+        'div',
+        `sm:hidden inline-flex w-fit rounded-full px-3 py-1 text-xs font-black border-2 shadow-sm mb-3 ${companyBadgeClass}`,
+        config.title
+    );
+
+    const counter = makeEl(
+        'div',
+        'mb-3 text-xs md:text-sm font-black text-slate-500'
+    );
+
     counter.append('Βήμα ');
     const current = makeEl('span', '', '1');
     current.dataset.processCurrent = '';
     counter.appendChild(current);
+
     counter.append(' από ');
+
     const total = makeEl('span', '', String(steps.length));
     total.dataset.processTotal = '';
     counter.appendChild(total);
 
-    header.appendChild(titleWrap);
-    header.appendChild(counter);
-
-    const dots = makeEl('div', 'flex items-center gap-2 mb-4');
+    const dots = makeEl(
+        'div',
+        'flex items-center gap-2 md:gap-3'
+    );
     dots.dataset.processDots = '';
 
-    const stepBox = makeEl('div', 'bg-white rounded-xl border border-white/70 p-3 mb-4');
-    const stepTitle = makeEl('p', 'text-sm font-black text-slate-800');
-    stepTitle.dataset.processStepTitle = '';
-    stepBox.appendChild(stepTitle);
-
-    const actions = makeEl('div', 'grid grid-cols-2 gap-3');
-
-    const prev = makeEl('button', 'py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-black text-xs hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed', 'Πίσω');
-    prev.type = 'button';
-    prev.dataset.processPrev = '';
-
-    const next = makeEl('button', `py-3 rounded-xl ${theme.button} text-white font-black text-xs shadow-lg transition disabled:opacity-40 disabled:cursor-not-allowed`, 'Επόμενο');
-    next.type = 'button';
-    next.dataset.processNext = '';
-
-    actions.appendChild(prev);
-    actions.appendChild(next);
-
-    const swipeHint = makeEl(
-        'p',
-        'md:hidden mt-3 text-center text-[11px] font-bold text-slate-500',
-        'Σύρε δεξιά για προηγούμενο βήμα'
-    );
-
     wizard.appendChild(header);
+    wizard.appendChild(mobileBadge);
+    wizard.appendChild(counter);
     wizard.appendChild(dots);
-    wizard.appendChild(stepBox);
-    wizard.appendChild(actions);
-
-    const changeChoice = makeEl(
-        'button',
-        'mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-black text-slate-600 hover:bg-slate-50 transition',
-        'Αλλαγή επιλογής'
-    );
-    changeChoice.type = 'button';
-    changeChoice.dataset.processChangeChoice = '';
-    wizard.appendChild(changeChoice);
-    wizard.appendChild(swipeHint);
 
     return wizard;
 }
-
 
 function buildProcessMailtoHref(config) {
     const subject = `Δικαιολογητικά ${config.title} - ${config.subtitle}`;
