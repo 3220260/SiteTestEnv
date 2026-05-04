@@ -421,24 +421,28 @@ function closeModal(id, updateHistory = true) {
 }
 
 function toggleSidebar() {
-    const menu = document.getElementById('sidebarMenu');
-    const overlay = document.getElementById('sidebarOverlay');
-    if (!menu || !overlay) return;
+  const menu = document.getElementById('sidebarMenu');
+  const overlay = document.getElementById('sidebarOverlay');
 
-    const isClosed = menu.classList.contains('-translate-x-full');
-    if (isClosed) {
-        lockPageScroll();
-        overlay.classList.remove('hidden');
-        requestAnimationFrame(() => {
-            overlay.classList.remove('opacity-0');
-            menu.classList.remove('-translate-x-full');
-        });
-    } else {
-        menu.classList.add('-translate-x-full');
-        overlay.classList.add('opacity-0');
-        unlockPageScrollIfIdle();
-        setTimeout(() => { overlay.classList.add('hidden'); }, 300);
-    }
+  if (!menu || !overlay) return;
+
+  const isClosed = menu.classList.contains('-translate-x-full');
+
+  if (isClosed) {
+    overlay.classList.remove('hidden');
+
+    requestAnimationFrame(() => {
+      overlay.classList.remove('opacity-0');
+      menu.classList.remove('-translate-x-full');
+    });
+  } else {
+    menu.classList.add('-translate-x-full');
+    overlay.classList.add('opacity-0');
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
 }
 
 function openImagePreview(imgName, updateHistory = true) {
