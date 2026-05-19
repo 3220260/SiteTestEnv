@@ -1,7 +1,7 @@
 /* =========================================
    1. CORE SETTINGS & TRACKING
    ========================================= */
-const GA_MEASUREMENT_ID = 'G-ZXPYBSBLTX';
+const GA_MEASUREMENT_ID = 'G-LHQ9SHKY6J';
 const IMAGE_PREVIEW_MIN_ZOOM = 1;
 const IMAGE_PREVIEW_MAX_ZOOM = 4;
 const MIN_CARD_VIEW_SECONDS = 2;
